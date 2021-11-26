@@ -1,6 +1,7 @@
 <?php
 require('config.php');
-session_start()
+session_start();
+require './fonctions/fonctions.php'
 ?>
 
 <!--    HEAD   -->
@@ -34,36 +35,14 @@ require('header.php');
         <div class="container-1">
             <h2 id="title">Nos derniers articles</h2>
         </div>
+        <!--    Generation Card   -->
         <div class="container-2">
-            <div class="card">
-                <div class="card-header">
-                    <img src="https://aitechnologiesng.com/wp-content/uploads/2021/01/Software-Development-Training-in-Abuja1-1024x768.jpg" alt="city" />
-                </div>
-                <div class="card-body">
-                    <a href="#main"><span class="tag tag-blue">Software Development</span></a>
-                    <h2>
-                        Test
-                    </h2>
-                    <p>
-                        amet consectetur adipiscing elit pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas integer eget aliquet nibh praesent tristique magna sit amet purus gravida quis blandit
-                    </p>
-                    <div class="user">
-                        <img src="https://studyinbaltics.ee/wp-content/uploads/2020/03/3799Ffxy.jpg" alt="user" />
-                        <div class="user-info">
-                            <h5>Utilisateur</h5>
-                            <small>1w ago</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php
-
-                // Faire les articles max 3 sur la page
-                //for($i = 0; $i < 3; $i++) {
-                //
-                //}
-            ?>
+        <?php
+        $article = new Article();
+        $article->getArticleLimite("3");
+        ?>
         </div>
+        <!--   Fin Generation Card   -->
     </section>
 
 <?php
