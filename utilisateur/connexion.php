@@ -1,6 +1,7 @@
 <?php
 require ('../fonctions.php');
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 if(isset($_POST['submit'])) {
     $connexion = new Module_Connexion($_POST['email'], $_POST['password']);
     $connexion->connexion();
@@ -30,6 +31,7 @@ if(isset($_POST['submit'])) {
                 <div class="box" id="top">
                     <h1>CONNEXION</h1>
                 </div>
+                <?php if (isset($_POST['submit'])) {$connexion->alerts(); } ?>
                 <div class="box" id="middle">
                     <input type="email" name="email" placeholder="Adresse courriel"><br>
                     <input type="password" name="password" placeholder="Mot de passe">

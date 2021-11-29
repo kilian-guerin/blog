@@ -43,7 +43,7 @@
                 <a href="#">Profil</a>
             </div>
             <div class="box">
-                <a href="">Se déconnecter</a>
+                <a href="disconnect.php">Se déconnecter</a>
             </div>
             <?php } else { ?>
             <div class="box">

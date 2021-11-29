@@ -3,22 +3,25 @@ require('config.php');
 
 class Module_Connexion
 {
-    private $_login;
+    private $_email;
     private $_mdp;
+    private $_Malert;
+    private $_Talert;
 
-    function __construct(string $login, string $mdp)
+
+    function __construct(string $email, string $mdp)
     {
-        $this->_login = $login;
+        $this->_email = $email;
         $this->_mdp = $mdp;
     }
 
 
-    public function verif_exist_util()
+    private function verif_exist_util()
     {
-        $req = "SELECT `login` FROM `utilisateurs` WHERE login='$this->_login'";
+        $req = "SELECT `email` FROM `utilisateurs` WHERE email='$this->_email'";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_util = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($list_util[0]['login'] == $this->_login) {
+        if (isset($list_util[0]['email']) && $list_util[0]['email'] != "") {
             $verifexist = TRUE;
             return $verifexist;
         } else {
@@ -29,10 +32,10 @@ class Module_Connexion
 
     private function verif_mdp()
     {
-        $req = "SELECT `login`, `password` FROM `utilisateurs` WHERE login='$this->_login' AND password='$this->_mdp'";
+        $req = "SELECT `email`, `password` FROM `utilisateurs` WHERE email='$this->_email' AND password='$this->_mdp'";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_util_mdp = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if (isset($list_util_mdp)) {
+        if (!empty($list_util_mdp)) {
             $verif = TRUE;
             return $verif;
         } else {
@@ -41,18 +44,45 @@ class Module_Connexion
         }
     }
 
+
+    public function alerts()
+    {
+        if ($this->_Talert == 1) {
+            echo "<div class='succes'>" . $this->_Malert . "</div>";
+        } else {
+            echo "<div class='error'>" . $this->_Malert . "</div>";
+        }
+    }
+
     public function connexion()
     {
-        if (isset($_POST)) {
+        if ($this->_email != "") {
             if ($this->verif_exist_util()) {
                 if ($this->verif_mdp()) {
-                    echo 'connexion réussie';
+                    $this->_Malert = 'Connexion réussie';
+                    $this->_Talert = 1;
+
+                    $req = "SELECT * FROM `utilisateurs` WHERE email='$this->_email'";
+                    $res = $GLOBALS['PDO']->query($req);
+                    $info_util = $res->fetchAll(PDO::FETCH_ASSOC);
+
+                    $_SESSION['email'] = $info_util[0]['email'];
+                    $_SESSION['login'] = $info_util[0]['login'];
+                    $_SESSION['password'] = $info_util[0]['password'];
+                    $_SESSION['perms'] = $info_util[0]['id_droits'];
+
+                    header('refresh:2;url=../index.php');
                 } else {
-                    echo 'Mot de passe faux';
+                    $this->_Malert = 'Mot de passe erronés';
+                    $this->_Talert = 0;
                 }
             } else {
-                echo 'Utilisateur existe pas';
+                $this->_Malert = "L'utilisateur " . $this->_email . " n'existe pas";
+                $this->_Talert = 0;
             }
+        } else {
+            $this->_Malert = 'Veuillez remplir les champs';
+            $this->_Talert = 0;
         }
     }
 }
@@ -84,7 +114,7 @@ class Module_Inscription
 
     private function verif_util()
     {
-        
+
         $req = "SELECT `login` FROM `utilisateurs` WHERE login='$this->_login'";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_util = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -99,7 +129,7 @@ class Module_Inscription
 
     private function verif_mail()
     {
-        
+
         $req = "SELECT `email` FROM `utilisateurs` WHERE email='$this->_email'";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_mail = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -111,40 +141,51 @@ class Module_Inscription
             return $verifexist;
         }
     }
+    public function alerts()
+    {
+        if ($this->_Talert == 1) {
+            echo "<div class='succes'>" . $this->_Malert . "</div>";
+        } else {
+            echo "<div class='error'>" . $this->_Malert . "</div>";
+        }
+    }
 
     public function ins_util()
     {
-        if ($this->_login == "") {
-            echo 'Veuillez remplir Login';
+        if ($this->_email == "") {
+            $this->_Malert = 'Veuillez remplir votre email';
         } else {
-            if ($this->_password == "") {
-                echo 'Veuillez remplir le mot de passe';
-            }
-            if ($this->verif_mdp_verif()) {
-                if ($this->verif_util() == FALSE) {
-                    if (filter_var($this->_email, FILTER_VALIDATE_EMAIL)) {
-                        if ($this->verif_mail() == FALSE) {
-                            
-                            $req = 'INSERT INTO `utilisateurs`(`login`, `password`, `email`, `id_droits`) VALUES (:login, :password, :email, :id)';
-                            $stmt = $GLOBALS['PDO']->prepare($req);
-                            $stmt->execute([
-                                ':login' => $this->_login,
-                                ':password' => $this->_password,
-                                ':email' => $this->_email,
-                                ':id' => $this->_id = 1,
-                            ]);
-                            echo 'Utilisateur crée';
+            if ($this->_password == "" && $this->_password_verif == "") {
+                $this->_Malert = 'Veuillez remplir le mot de passe';
+            } else {
+                if ($this->verif_mdp_verif()) {
+                    if ($this->verif_util() == FALSE) {
+                        if (filter_var($this->_email, FILTER_VALIDATE_EMAIL)) {
+                            if ($this->verif_mail() == FALSE) {
+
+                                $req = 'INSERT INTO `utilisateurs`(`login`, `password`, `email`, `id_droits`) VALUES (:login, :password, :email, :id)';
+                                $stmt = $GLOBALS['PDO']->prepare($req);
+                                $stmt->execute([
+                                    ':login' => $this->_login,
+                                    ':password' => $this->_password,
+                                    ':email' => $this->_email,
+                                    ':id' => $this->_id = 1,
+                                ]);
+                                $this->_Malert = 'Utilisateur crée';
+                                $this->_Talert = 1;
+                                header('Refresh:2 ; URL=index.php');
+                            } else {
+                                $this->_Malert = $this->_email . " existe déjà";
+                            }
                         } else {
-                            echo $this->_email . " existe déjà";
+                            $this->_Malert = $this->_email . " n'est pas une adresse valide";
                         }
                     } else {
-                        echo $this->_email . " n'est pas une adresse valide";
+                        $this->_Malert = "L'utilisateur " . $this->_login . " existe déjà";
                     }
                 } else {
-                    echo "L'utilisateur " . $this->_login . " existe déjà";
+                    $this->_Malert = 'Les mots de passes ne sonts pas identiques';
                 }
-            } else {
-                echo 'Les mots de passes ne sonts pas identiques';
             }
         }
     }
@@ -204,8 +245,52 @@ class Article
                     </div>
                 </div>
             </div>
-        <?php
+<?php
         }
     }
 }
 ?>
+
+<style>
+    .succes {
+        background-color: green;
+        font-weight: bold;
+        font-family: "Comfortaa";
+        width: 90%;
+        text-align: center;
+        padding: 10px;
+        animation: 1s ease-in-out alertSuccess forwards;
+    }
+
+    .error {
+        background-color: red;
+        font-weight: bold;
+        font-family: "Comfortaa";
+        width: 90%;
+        text-align: center;
+        padding: 10px;
+        animation: 1s ease-in-out alertError forwards;
+    }
+
+    @keyframes alertSuccess {
+        from {
+            background-color: transparent;
+        }
+
+        to {
+            background-color: green;
+            color: white
+        }
+    }
+
+    @keyframes alertError {
+        from {
+            background-color: transparent;
+        }
+
+        to {
+            background-color: red;
+            color: white
+        }
+    }
+</style>
