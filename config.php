@@ -4,4 +4,5 @@ $PDO = new PDO('mysql:host=51.38.48.43:3306;dbname=s37_kilian', 'u37_of3o22891W'
 
 $name = 'Dev(Tricks)';
 
+session_start();
 ?>

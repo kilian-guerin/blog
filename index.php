@@ -1,7 +1,5 @@
 <?php
-require('config.php');
-session_start();
-require './fonctions/fonctions.php'
+require ('./fonctions.php');
 ?>
 
 <!--    HEAD   -->
