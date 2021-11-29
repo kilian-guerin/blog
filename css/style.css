@@ -126,8 +126,17 @@ header nav.navbar div.container-right .dropdown:hover .dropdown-content {
     flex-direction:row;
 }
 
-header nav.navbar div.container-right .dropdown:hover .dropbtn {
+header nav.navbar div.container-right .dropdown:hover .dropdown-content#moyen {
     color:#000;
+    padding:0.1%;
+    text-decoration:none;
+    display:block;
+    right: 1%;
+}
+
+header nav.navbar div.container-right .dropdown-content#moyen a {
+    color:#000;
+    padding-right: 20%;
 }
 
 header nav.navbar div.container-right .dropdown:hover .dropbtn a {
@@ -428,6 +437,19 @@ section.container#articles {
     margin-bottom: 1%;
 }
 
+section.container#articles div.container-1 h2#article-title {
+    padding-top: 5%;
+    font-family: 'Comfortaa';
+    font-size: 225%;
+}
+
+section.container#articles div.container-1 h4#article-sous-title {
+    font-family: 'Comfortaa';
+    font-size: 120%;
+    padding-top: 0.1%;
+    margin-bottom: 3%;
+}
+
 section.container div.articles {
     height: auto;
     display: flex;
@@ -437,7 +459,7 @@ section.container div.articles {
 }
 
 section.container div.articles div.article-card {
-    margin-top: 2%;
+    margin-bottom: 2%;
     padding: 1.5%;
     width: 75%;
     height: auto;
@@ -460,6 +482,7 @@ section.container div.articles div.article-card:hover {
 
 
 section.container div.articles div.article-card a {
+    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -482,7 +505,28 @@ section.container div.articles div.article-card div.box#left {
     width: 85%;
 }
 
+section.container div.articles div.article-card div.box#left h2 {
+    margin-bottom: 1%;
+}
 
+section.container div.articles div.article-card div.box#bottom {
+    margin-top: 1.2%;
+}
+
+section.container div.pagination {
+    margin-top: 3%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+section.container div.pagination div#right, div#left {
+    margin: 2%;
+}
+
+section.container div.pagination div#right i, div#left i {
+    color: black;
+}
 
 
 /*

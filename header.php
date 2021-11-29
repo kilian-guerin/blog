@@ -15,11 +15,14 @@
                 <div class="dropdown-content">
                     <div>
                         <h3>Les Catégories</h3>
-                        <a href="#">Voir tous les articles</a>
-                        <a href="#">Voir tous les articles</a>
-                        <a href="#">Voir tous les articles</a>
-                        <a href="#">Voir tous les articles</a>
-                        <a href="#">Voir tous les articles</a>
+                        <?php
+                        $req = "SELECT * FROM `categories`";
+                        $stmt = $GLOBALS['PDO']->query($req);
+                        $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        for ($i = 0; $i < count($list_articles); $i++) {
+                        ?>
+                            <a href="/blog/article/articles.php?categorie=<?php echo $list_articles[$i]['nom'] ?>"><?php echo $list_articles[$i]['nom'] ?></a> <?php } ?>
+                            <a href="/blog/article/articles.php?categorie=tout">Afficher toute les catégories</a>
                     </div>
                     <div>
                         <h3>Les derniers articles</h3>
@@ -31,27 +34,27 @@
                     </div>
                 </div>
             </div>
-            <?php if($_SESSION) {
-                if($_SESSION['perms'] == 1337 || $_SESSION['perms'] == 42) {
+            <?php if ($_SESSION) {
+                if ($_SESSION['perms'] == 1337 || $_SESSION['perms'] == 42) {
                     echo ('
                         <div class="box">
                             <a href="admin.php">Admin</a>
                         </div>
                     ');
                 } ?>
-            <div class="box">
-                <a href="#">Profil</a>
-            </div>
-            <div class="box">
-                <a href="disconnect.php">Se déconnecter</a>
-            </div>
+                <div class="box">
+                    <a href="#">Profil</a>
+                </div>
+                <div class="box">
+                    <a href="disconnect.php">Se déconnecter</a>
+                </div>
             <?php } else { ?>
-            <div class="box">
-                <a href="./utilisateur/connexion.php">Connexion</a>
-            </div>
-            <div class="box">
-                <a href="./utilisateur/inscription.php">Inscription</a>
-            </div>
+                <div class="box">
+                    <a href="/blog/utilisateur/connexion.php">Connexion</a>
+                </div>
+                <div class="box">
+                    <a href="/blog/utilisateur/inscription.php">Inscription</a>
+                </div>
             <?php } ?>
         </div>
     </nav>

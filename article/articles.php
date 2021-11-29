@@ -34,7 +34,8 @@ require('../fonctions.php');
 
     <section class="container" id="articles">
         <div class="container-1">
-            <h2 id="title">Nos articles</h2>
+            <h2 id="article-title">Les articles publiés</h2>
+            <h4 id="article-sous-title">Cliquer sur l'article pour le voir</h4>
         </div>
         <!--    Generation Card   -->
         <div class="articles">
@@ -49,10 +50,11 @@ require('../fonctions.php');
                     <div class="box" id="left">
                         <h2>Title</h2>
                         <span>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. A diam
-                            sollicitudin tempor id eu nisl. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus...
+                            Ceci est un article
                         </span>
+                        <div class="box" id="bottom">
+                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
+                        </div>
                     </div>
                 </a>
             </div>
@@ -69,6 +71,9 @@ require('../fonctions.php');
                             et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. A diam
                             sollicitudin tempor id eu nisl. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus...
                         </span>
+                        <div class="box" id="bottom">
+                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
+                        </div>
                     </div>
                 </a>
             </div>
@@ -84,6 +89,9 @@ require('../fonctions.php');
                             et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. A diam
                             sollicitudin tempor id eu nisl. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus...
                         </span>
+                        <div class="box" id="bottom">
+                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
+                        </div>
                     </div>
                 </a>
             </div>
@@ -100,12 +108,14 @@ require('../fonctions.php');
                             et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. A diam
                             sollicitudin tempor id eu nisl. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus...
                         </span>
+                        <div class="box" id="bottom">
+                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
+                        </div>
                     </div>
                 </a>
             </div>
             <div class="article-card">
                 <a href="../index.php">
-
                     <div class="box" id="right">
                         <i class="fab fa-dev fa-4x"></i>
                     </div>
@@ -116,7 +126,22 @@ require('../fonctions.php');
                             et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. A diam
                             sollicitudin tempor id eu nisl. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus...
                         </span>
+                        <div class="box" id="bottom">
+                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
+                        </div>
                     </div>
+                </a>
+            </div>
+        </div>
+        <div class="pagination">
+            <div class="" id="left">
+                <a href="">
+                    <i class="fas fa-chevron-left fa-4x"></i>
+                </a>
+            </div>
+            <div class="" id="right">
+                <a href="">
+                    <i class="fas fa-chevron-right fa-4x"></i>
                 </a>
             </div>
         </div>

@@ -217,38 +217,72 @@ class Article
         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-
-    public function getArticleLimite(int $limit, int $OFFSET = 0)
-    {
-        $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` LIMIT " . $limit . "";
+    public function getCategorie() {
+        $req = "SELECT * FROM `categories`";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        for ($i = 0; $i < $limit; $i++) { ?>
-            <div class="card">
-                <div class="card-header">
-                    <img src="https://aitechnologiesng.com/wp-content/uploads/2021/01/Software-Development-Training-in-Abuja1-1024x768.jpg" alt="city" />
-                </div>
-                <div class="card-body">
-                    <a href="#main"><span class="tag tag-blue"><?php echo $list_articles[$i]['categorie'] ?></span></a>
-                    <h2>
-                        <?php echo $list_articles[$i]['titre'] ?>
-                    </h2>
-                    <p>
-                        <?php echo $list_articles[$i]['article'] ?>
-                    </p>
-                    <div class="user">
-                        <img src="https://studyinbaltics.ee/wp-content/uploads/2020/03/3799Ffxy.jpg" alt="user" />
-                        <div class="user-info">
-                            <h5><?php echo $list_articles[$i]['login'] ?></h5>
-                            <small><?php echo $list_articles[$i]['date'] ?></small>
+        return $list_articles;
+    }
+
+
+    public function getArticleLimite(int $limit, int $OFFSET = 0, string $type, string $categorie)
+    {
+        if ($categorie == 'tout') {
+            $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` LIMIT $limit OFFSET $OFFSET";
+        } else {
+            $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` WHERE `categories`.`nom`='$categorie' LIMIT $limit OFFSET $OFFSET";
+        }
+        $stmt = $GLOBALS['PDO']->query($req);
+        $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($type == 'card') {
+            for ($i = 0; $i < count($list_articles); $i++) { ?>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="https://aitechnologiesng.com/wp-content/uploads/2021/01/Software-Development-Training-in-Abuja1-1024x768.jpg" alt="city" />
+                    </div>
+                    <div class="card-body">
+                        <a href="#main"><span class="tag tag-blue"><?php echo $list_articles[$i]['categorie'] ?></span></a>
+                        <h2>
+                            <?php echo $list_articles[$i]['titre'] ?>
+                        </h2>
+                        <p>
+                            <?php echo substr($list_articles[$i]['article'], 0, 100) . "..." ?>
+                        </p>
+                        <div class="user">
+                            <img src="https://studyinbaltics.ee/wp-content/uploads/2020/03/3799Ffxy.jpg" alt="user" />
+                            <div class="user-info">
+                                <h5><?php echo $list_articles[$i]['login'] ?></h5>
+                                <small><?php echo $list_articles[$i]['date'] ?></small>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php
+            }
+        } elseif ($type == 'ligne') {
+            for ($i = 0; $i < count($list_articles); $i++) { ?>
+                <div class="article-card">
+                    <a href="../index.php">
+                        <div class="box" id="right">
+                            <span class="fa-stack fa-2x">
+                                <i class="fas fa-chevron-left fa-stack-2x"></i>
+                                <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
+                            </span>
+                        </div>
+                        <div class="box" id="left">
+                            <h2> <?php echo $list_articles[$i]['titre'] ?></h2>
+                            <span>
+                                <?php echo substr($list_articles[$i]['article'], 0, 100) . "..." ?>
+                            </span>
+                        </div>
+                    </a>
+                </div>
 <?php
+            }
         }
     }
 }
+
 ?>
 
 <style>
