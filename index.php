@@ -37,7 +37,7 @@ require('header.php');
         <div class="container-2">
         <?php
         $article = new Article();
-        $article->getArticleLimite("3");
+        $article->getArticleLimite(3,0,"card","tout");
         ?>
         </div>
         <!--   Fin Generation Card   -->

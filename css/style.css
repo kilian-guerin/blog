@@ -528,6 +528,433 @@ section.container div.pagination div#right i, div#left i {
     color: black;
 }
 
+/*
+
+        CREATE ARTICLE
+
+*/
+
+main.create-article {
+    height: 100%;
+    width: 100%;
+    background-image: url('../img/background.jpg');
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.create-article div.container {
+    width: 30%;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 0px 0px 25px 1px black;
+}
+
+main.create-article div.container form.forms {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main.create-article div.container div.box#top {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.create-article div.container div.box#top h1 {
+    font-weight: bold;
+    font-family: "Comfortaa";
+}
+
+main.create-article div.container div.box#middle {
+    height:40%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main.create-article div.container div.box#middle input {
+    width: 80%;
+    height: 15%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: none;
+    background-color: rgba(247,247,249,.7);
+    font-family: "Comfortaa";
+    color: grey;
+
+    border: 2px solid rgb(151, 149, 149);
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+}
+
+main.create-article div.container div.box#middle select {
+    width: 80%;
+    height: 15%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-bottom: 3.2%;
+    background-color: rgba(247,247,249,.7);
+    font-family: "Comfortaa";
+    color: grey;
+
+    border: 2px solid rgb(151, 149, 149);
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+main.create-article div.container div.box#middle textarea {
+    width: 80%;
+    height: 100%;
+    padding: 2%;
+    border: none;
+    background-color: rgba(247,247,249,.7);
+    font-family: "Comfortaa";
+    color: grey;
+    border: 2px solid rgb(151, 149, 149);
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+main.create-article div.container div.box#bottom {
+    height: 10%;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+main.create-article div.container div.box#bottom input {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 3% 6%;
+    font-size: 92%;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: bold;
+    font-family: "Comfortaa";
+}
+
+main.create-article div.container div.box#bottom input#create {
+    background-color: #5867dd;
+    border-color: #5867dd;
+    color: white;
+    border: 2px solid #5867dd;
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+    transition-duration: 300ms;
+    margin-right: 6%;
+}
+
+main.create-article div.container div.box#bottom input#create:hover {
+    transition-duration: 300ms;
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+/*
+        VIEW ARTICLE
+*/
+
+main.view-article {
+    height: 100%;
+    width: 100%;
+    background-image: url('../img/background.jpg');
+}
+
+main.view-article div.container-top {
+    width: 100%;
+    height: 68%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.view-article div.container-top div.box {
+    margin-top: 8%;
+    width: 40%;
+    height: 40%;
+    border: 10px white solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main.view-article div.container-top div.box h2 {
+    margin: 10%;
+    color: white;
+    font-family: "Comfortaa";
+    font-size: 500%;
+}
+
+
+section.view-article {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+section.view-article div.container {
+    width: 100%;
+    height: 100%;
+    margin-top: 6%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+section.view-article div.container h2 {
+    font-family: 'Comfortaa';
+    font-size: 225%;
+}
+
+section.view-article div.container h4 {
+    padding-top: 1%;
+    font-family: 'Comfortaa';
+    font-size: 120%;
+    margin-bottom: 3%;
+}
+
+
+section.view-article div.container-2 {
+    height: 55%;
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+section.view-article div.container-2 span {
+    padding-top: 0;
+    font-family: 'Comfortaa';
+    font-size: 100%;
+    margin-bottom: 3%;
+}
+
+/*
+
+        ADMIN
+
+*/
+
+main.admin {
+    height: 100%;
+    width: 100%;
+    background-image: url('../img/background.jpg');
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.admin div.container {
+    width: 30%;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 0px 0px 25px 1px black;
+}
+
+main.admin div.container form.forms {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main.admin div.container div.box#top {
+    height: 10%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main.admin div.container div.box#top h1 {
+    font-weight: bold;
+    font-family: "Comfortaa";
+}
+
+main.admin div.container div.box#middle {
+    height:20%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+main.admin div.container div.box#middle input {
+    width: 80%;
+    height: 30%;
+    margin-top: 5%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border: none;
+    background-color: rgba(247,247,249,.7);
+    font-family: "Comfortaa";
+    font-weight: bold;
+    font-size: 100%;
+    color: grey;
+
+    border: 2px solid rgb(151, 149, 149);
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+
+    background-size: 7%;
+    background-repeat: no-repeat;
+    background-position-x: 2%;
+    background-position-y: 75%;
+}
+
+main.admin div.container div.box#middle select {
+    width: 80%;
+    height: 15%;
+    padding-left: 2%;
+    padding-right: 2%;
+    margin-bottom: 3.2%;
+    background-color: rgba(247,247,249,.7);
+    font-family: "Comfortaa";
+    color: grey;
+
+    border: 2px solid rgb(151, 149, 149);
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+main.admin div.container div.box#middle textarea {
+    width: 80%;
+    height: 100%;
+    padding: 2%;
+    border: none;
+    background-color: rgba(247,247,249,.7);
+    font-family: "Comfortaa";
+    color: grey;
+    border: 2px solid rgb(151, 149, 149);
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+main.admin div.container div.box#bottom {
+    height: 10%;
+    width: 60%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+main.admin div.container div.box#bottom input {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    padding: 3% 6%;
+    font-size: 92%;
+    line-height: 1.42857143;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-weight: bold;
+    font-family: "Comfortaa";
+}
+
+main.admin div.container div.box#bottom input#create {
+    background-color: #5867dd;
+    border-color: #5867dd;
+    color: white;
+    border: 2px solid #5867dd;
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
+    transition-duration: 300ms;
+    margin-right: 6%;
+}
+
+main.admin div.container div.box#bottom input#create:hover {
+    transition-duration: 300ms;
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+main.admin div.container div.box#middle-2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+main.admin div.container div.box#middle-2 hr {
+    width: 180px;
+    color: #ccc;
+}
+
+main.admin div.container div.box#middle-2 span {
+    font-family: "Comfortaa";
+    color: #ccc;
+    padding: 5%;
+}
+
+main.admin div.container div.box#middle-fix {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+main.admin div.container div.box#middle-fix input#btn-fix {
+    width: 80%;
+    height: auto;
+    margin-top: 0.3%;
+    background-color: rgba(247,247,249,.7);
+    font-family: "Comfortaa";
+    font-weight: bold;
+    font-size: 100%;
+    color: grey;
+
+    padding: 1%;
+
+    border: 2px solid rgb(151, 149, 149);
+    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2)
+}
+
 
 /*
         FOOTER
@@ -573,4 +1000,15 @@ footer div#bottom div.container a:hover {
 footer div#bottom div.container ul, li {
     list-style-type: none;
     margin-bottom: 1.5%;
+}
+
+footer div#bottom div.container ul#icons {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+footer div#bottom div.container ul#icons li#icon {
+    margin-left: 10%;
+    margin-top: 10%
 }

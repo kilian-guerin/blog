@@ -32,10 +32,10 @@ class Module_Connexion
 
     private function verif_mdp()
     {
-        $req = "SELECT `email`, `password` FROM `utilisateurs` WHERE email='$this->_email' AND password='$this->_mdp'";
+        $req = "SELECT `email`, `password` FROM `utilisateurs` WHERE email='$this->_email'";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_util_mdp = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if (!empty($list_util_mdp)) {
+        if (password_verify($this->_mdp, $list_util_mdp[0]['password'])) {
             $verif = TRUE;
             return $verif;
         } else {
@@ -68,12 +68,11 @@ class Module_Connexion
 
                     $_SESSION['email'] = $info_util[0]['email'];
                     $_SESSION['login'] = $info_util[0]['login'];
-                    $_SESSION['password'] = $info_util[0]['password'];
                     $_SESSION['perms'] = $info_util[0]['id_droits'];
 
-                    header('refresh:2;url=../index.php');
+                    header('refresh:2;url=/blog/index.php');
                 } else {
-                    $this->_Malert = 'Mot de passe erronés';
+                    $this->_Malert = 'Mot de passe erroné';
                     $this->_Talert = 0;
                 }
             } else {
@@ -167,13 +166,13 @@ class Module_Inscription
                                 $stmt = $GLOBALS['PDO']->prepare($req);
                                 $stmt->execute([
                                     ':login' => $this->_login,
-                                    ':password' => $this->_password,
+                                    ':password' => password_hash($this->_password,PASSWORD_DEFAULT),
                                     ':email' => $this->_email,
                                     ':id' => $this->_id = 1,
                                 ]);
                                 $this->_Malert = 'Utilisateur crée';
                                 $this->_Talert = 1;
-                                header('Refresh:2 ; URL=index.php');
+                                header('Refresh:2 ; URL=/blog/index.php');
                             } else {
                                 $this->_Malert = $this->_email . " existe déjà";
                             }

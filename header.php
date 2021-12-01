@@ -4,7 +4,7 @@
 <header>
     <nav class="navbar">
         <div class="container-left">
-            <a href="index.php"><?php echo $GLOBALS['name'] ?></a>
+            <a href="/blog/index.php"><?php echo $GLOBALS['name'] ?></a>
         </div>
         <div class="container-right">
             <div class="box">
@@ -26,36 +26,37 @@
                     </div>
                     <div>
                         <h3>Les derniers articles</h3>
-                        <a href="#">Voir tous les articles</a>
-                        <a href="#">Voir tous les articles</a>
-                        <a href="#">Voir tous les articles</a>
-                        <a href="#">Voir tous les articles</a>
-                        <a href="#">Voir tous les articles</a>
+                        <?php $req = "SELECT `titre` FROM `articles` ORDER BY `date` DESC LIMIT 4";
+                        $stmt = $GLOBALS['PDO']->query($req);
+                        $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        for ($i = 0; $i < count($list_articles); $i++ ) { ?>
+                        <a href="#"><?php echo $list_articles[$i]['titre']; ?></a>
+                        <?php }?>
+                        <a href="/blog/article/articles.php?categorie=tout">Afficher tout les articles</a>
                     </div>
                 </div>
             </div>
-            <?php if ($_SESSION) {
-                if ($_SESSION['perms'] == 1337 || $_SESSION['perms'] == 42) {
-                    echo ('
-                        <div class="box">
-                            <a href="admin.php">Admin</a>
+            <?php if($_SESSION) {?>
+                <div class="dropdown">
+                    <a class="dropbtn"> <?php echo $_SESSION['login'] ?> </a>
+                    <div class="dropdown-content" id="moyen">
+                        <div>
+                            <?php  if($_SESSION['perms'] == 1337 || $_SESSION['perms'] == 42) {
+                                echo '<a href="/blog/utilisateur/admin.php">Admin</a>';
+                            } ?>
+                            <a href="/blog/utilisateur/profil.php">Profil</a>
+                            <a href="/blog/disconnect.php">Se déconnecter</a>
                         </div>
-                    ');
-                } ?>
-                <div class="box">
-                    <a href="#">Profil</a>
+                    </div>
                 </div>
-                <div class="box">
-                    <a href="disconnect.php">Se déconnecter</a>
-                </div>
-            <?php } else { ?>
-                <div class="box">
+            <?php } else {
+                echo ('<div class="box">
                     <a href="/blog/utilisateur/connexion.php">Connexion</a>
                 </div>
                 <div class="box">
                     <a href="/blog/utilisateur/inscription.php">Inscription</a>
-                </div>
-            <?php } ?>
+                </div>');
+            } ?>
         </div>
     </nav>
 </header>
