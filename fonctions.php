@@ -247,7 +247,7 @@ class Article
             </div>
             <div class="container-2">
                 <span>
-                <?php echo $article[0]['article']; ?>
+                    <?php echo $article[0]['article']; ?>
                 </span>
             </div>
         </section>
@@ -289,9 +289,9 @@ class Article
     public function getArticleLimite(int $limit, int $OFFSET = 0, string $type, string $categorie)
     {
         if ($categorie == 'tout') {
-            $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` LIMIT $limit OFFSET $OFFSET";
+            $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` ORDER BY `articles`.`date` DESC LIMIT $limit OFFSET $OFFSET";
         } else {
-            $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` WHERE `categories`.`nom`='$categorie' LIMIT $limit OFFSET $OFFSET";
+            $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` WHERE `categories`.`nom`='$categorie' ORDER BY `articles`.`date` LIMIT $limit OFFSET $OFFSET";
         }
         $stmt = $GLOBALS['PDO']->query($req);
         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -299,16 +299,18 @@ class Article
         if ($type == 'card') {
             for ($i = 0; $i < count($list_articles); $i++) { ?>
                 <div class="card">
-                    <div class="card-header">
-                        <img src="https://aitechnologiesng.com/wp-content/uploads/2021/01/Software-Development-Training-in-Abuja1-1024x768.jpg" alt="city" />
-                    </div>
+                    <a href="/blog/article/article.php?id=<?php echo $list_articles[$i]['id'] ?>">
+                        <div class="card-header">
+                            <img src="https://aitechnologiesng.com/wp-content/uploads/2021/01/Software-Development-Training-in-Abuja1-1024x768.jpg" alt="city" />
+                        </div>
+                    </a>
                     <div class="card-body">
-                        <a href="/blog/article/articles.php?categorie=<?= $list_articles[$i]['categorie']?>"><span class="tag tag-blue"><?php echo $list_articles[$i]['categorie'] ?></span></a>
+                        <a href="/blog/article/articles.php?categorie=<?= $list_articles[$i]['categorie'] ?>"><span class="tag tag-blue"><?php echo $list_articles[$i]['categorie'] ?></span></a>
                         <h2>
                             <?php echo $list_articles[$i]['titre'] ?>
                         </h2>
                         <p>
-                            <?php echo substr($list_articles[$i]['article'], 0, 100) . "..." ?>
+                            <?= strlen($list_articles[$i]['article']) > 100 ? substr($list_articles[$i]['article'], 0, 100) . "..." : $list_articles[$i]['article']  ?>
                         </p>
                         <div class="user">
                             <img src="https://studyinbaltics.ee/wp-content/uploads/2020/03/3799Ffxy.jpg" alt="user" />
@@ -334,7 +336,7 @@ class Article
                         <div class="box" id="left">
                             <h2> <?php echo $list_articles[$i]['titre'] ?></h2>
                             <span>
-                                <?php echo substr($list_articles[$i]['article'], 0, 100) . "..." ?>
+                            <?= strlen($list_articles[$i]['article']) > 100 ? substr($list_articles[$i]['article'], 0, 100) . "..." : $list_articles[$i]['article']  ?>
                             </span>
                             <div class="box" id="bottom">
                                 <h4>Posté par <?php echo $list_articles[$i]['login'] . ' le ' . $list_articles[$i]['date'] ?></h4>
