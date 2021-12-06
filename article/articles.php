@@ -21,6 +21,7 @@ ini_set('display_errors', 1);
     <!--    Header   -->
     <?php
     require('../header.php');
+    
     ?>
 
     <main class="home">
