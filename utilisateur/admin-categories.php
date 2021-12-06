@@ -6,13 +6,11 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
 } else {
     if(isset($_POST['return'])) {
         header('Location: /blog/utilisateur/admin.php');
-    } elseif(isset($_POST['edit'])) {
-
     } elseif(isset($_POST['delete'])) {
         $delete = "DELETE FROM `categories` WHERE id='". $_POST['delete'] ."'";
         $res = $GLOBALS['PDO']->exec($delete);
         header('refresh:0');
-    }
+    };
 ?>
 
 <!--    HEAD   -->
@@ -22,7 +20,7 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $GLOBALS['name'] . ' - Admin' ?></title> 
+    <title><?php echo $GLOBALS['name'] . ' - Admin' ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
@@ -33,16 +31,9 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
             <div class="box" id="top">
                 <h1>GÉRER LES CATÉGORIES</h1>
             </div>
-            <div class="create"> 
-            </div>
             <div class="box" id="middle-fix">
                 <?php
-                echo '
-                    <form action="" method="post" style="width: 90%; margin-right: 2.2%">';
-                        echo '<button type="submit" name="edit" class="btn green" style="width: 100%" value="">Ajouter une catégorie</button>';
-                    echo '
-                    </form>
-                ';
+                echo '<a class="btn green" href="#boxcategory" style="width: 100% margin-right: 2.2%">Ajouter une catégorie</a>';
 
                 $req = "SELECT * FROM `categories` ORDER BY `nom` ASC";
                 $stmt = $GLOBALS['PDO']->query($req);

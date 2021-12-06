@@ -1043,17 +1043,6 @@ main.admin div.container div.box#middle-fix div#btn-fix div#btn-right form butto
     margin-right: 7%;
 }
 
-/* CATEGORIES */
-
-main.admin div.container#admin div.create::after {
-    position: absolute;
-    z-index: 10;
-    background-color: #000;
-    width: 10%;
-    height: 10%;
-}
-
-
 /*
         FOOTER
  */
