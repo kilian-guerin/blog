@@ -195,8 +195,8 @@ class Article
 {
 
     public $_count;
-    // private $_titre;
-    // private $_idutil;
+    private $_Malert;
+    private $_Talert;
     // private $_idcat;
     // private $_id;
 
@@ -209,6 +209,16 @@ class Article
     //     // $this->_id = $id;
 
     // }
+
+    public function alerts()
+    {
+        if ($this->_Talert == 1) {
+            echo "<div class='succes'>" . $this->_Malert . "</div>";
+        } else {
+            echo "<div class='error'>" . $this->_Malert . "</div>";
+        }
+    }
+
 
     public function getArticleParId(int $id)
     {
@@ -227,6 +237,8 @@ class Article
             ':id_utilisateur' => $id_utilisateur,
             ':id_categorie' => $id_categorie,
         ]);
+        $this->_Malert = 'Article crée';
+        $this->_Talert = 1;
     }
 
     public function getArticleLimite(int $limit, int $OFFSET = 0, string $type, string $categorie)

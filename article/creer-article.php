@@ -3,8 +3,11 @@ require ('../fonctions.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 $article = new Article();
-$article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id'],$idcat);
+if (isset($_POST['submit'])){
+$article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id'],$_POST['choose-article']);}
+var_dump($_POST);
 ?>
+
 <!--    HEAD   -->
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +34,7 @@ $article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id
                         $stmt = $GLOBALS['PDO']->query($req);
                         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         for ($i = 0; $i < count($list_articles); $i++) { ?>
-                            <option value="<?php echo $list_articles[$i]['nom'] ?>"><?php echo $list_articles[$i]['nom'] ?></option> <?php 
+                            <option value="<?php echo $list_articles[$i]['id'] ?>"><?php echo $list_articles[$i]['nom'] ?></option> <?php 
                         } ?>
                     </select>
                     <input type="text" name="icon-article" placeholder="Icon de l'article (Font Awesome uniquement)"><br>
