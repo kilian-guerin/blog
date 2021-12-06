@@ -195,6 +195,7 @@ class Article
 {
 
     public $_count;
+    public $_countnext;
     private $_Malert;
     private $_Talert;
     // private $_idcat;
@@ -237,8 +238,19 @@ class Article
             ':id_utilisateur' => $id_utilisateur,
             ':id_categorie' => $id_categorie,
         ]);
-        $this->_Malert = 'Article crée';
+        $this->_Malert = 'Articles crée';
         $this->_Talert = 1;
+    }
+
+    public function countnext(int $limit, int $OFFSET = 0, string $type, string $categorie) {
+        if ($categorie == 'tout') {
+            $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` LIMIT $limit OFFSET $OFFSET";
+        } else {
+            $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` WHERE `categories`.`nom`='$categorie' LIMIT $limit OFFSET $OFFSET";
+        }
+        $stmt = $GLOBALS['PDO']->query($req);
+        $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->_countnext = count($list_articles);
     }
 
     public function getArticleLimite(int $limit, int $OFFSET = 0, string $type, string $categorie)

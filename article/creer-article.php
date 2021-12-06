@@ -5,7 +5,6 @@ ini_set('display_errors', 1);
 $article = new Article();
 if (isset($_POST['submit'])){
 $article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id'],$_POST['choose-article']);}
-var_dump($_POST);
 ?>
 
 <!--    HEAD   -->
@@ -23,8 +22,10 @@ var_dump($_POST);
     <main class="create-article">
         <div class="container" id="forms">
             <form action="#" method="post" class="forms">
+            <?php if (isset($_POST['submit'])) {$article->alerts(); } ?>
+
                 <div class="box" id="top">
-                    <h1>CRÉER VOTRE ARTICLE</h1>
+                    <h1>CRÉER VOTRE ARTICLE</h1><br>
                 </div>
                 <div class="box" id="middle">
                     <input type="text" name="title-article" placeholder="Titre de l'article"><br>

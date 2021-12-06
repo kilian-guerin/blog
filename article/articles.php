@@ -51,6 +51,7 @@ ini_set('display_errors', 1);
             }
             $article = new Article();
             $article->getArticleLimite(5, $_GET['page'], 'ligne', $_GET['categorie']);
+            $article->countnext(5, $_GET['page'] + 5, 'ligne', $_GET['categorie']);
             ?>
         </div>
 
@@ -70,7 +71,7 @@ ini_set('display_errors', 1);
                     </a>
                 </div>
             <?php } ?>
-            <?php if ($article->_count == 5) { ?>
+            <?php if ($article->_countnext > 0) { ?>
                 <div class="" id="right">
                     <a href="/blog/article/articles.php?<?php echo 'categorie=' . $_GET['categorie'] . '&';  ?>page=<?php echo $OFFSET + 5; ?>">
                         <i class="fas fa-chevron-right fa-4x"></i>
@@ -88,3 +89,4 @@ ini_set('display_errors', 1);
 </body>
 
 </html>
+
