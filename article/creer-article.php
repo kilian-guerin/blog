@@ -3,8 +3,10 @@ require ('../fonctions.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 $article = new Article();
-$article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id'],$idcat);
+if (isset($_POST['submit'])){
+$article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id'],$_POST['choose-article']);}
 ?>
+
 <!--    HEAD   -->
 <!DOCTYPE html>
 <html lang="en">
@@ -20,8 +22,10 @@ $article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id
     <main class="create-article">
         <div class="container" id="forms">
             <form action="#" method="post" class="forms">
+            <?php if (isset($_POST['submit'])) {$article->alerts(); } ?>
+
                 <div class="box" id="top">
-                    <h1>CRÉER VOTRE ARTICLE</h1>
+                    <h1>CRÉER VOTRE ARTICLE</h1><br>
                 </div>
                 <div class="box" id="middle">
                     <input type="text" name="title-article" placeholder="Titre de l'article"><br>
@@ -31,7 +35,7 @@ $article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id
                         $stmt = $GLOBALS['PDO']->query($req);
                         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         for ($i = 0; $i < count($list_articles); $i++) { ?>
-                            <option value="<?php echo $list_articles[$i]['nom'] ?>"><?php echo $list_articles[$i]['nom'] ?></option> <?php 
+                            <option value="<?php echo $list_articles[$i]['id'] ?>"><?php echo $list_articles[$i]['nom'] ?></option> <?php 
                         } ?>
                     </select>
                     <input type="text" name="icon-article" placeholder="Icon de l'article (Font Awesome uniquement)"><br>

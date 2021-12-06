@@ -1,5 +1,7 @@
 <?php
 require('../fonctions.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 ?>
 
 <!--    HEAD   -->
@@ -40,14 +42,16 @@ require('../fonctions.php');
         <!--    Generation Card   -->
         <div class="articles">
             <?php
-            if ($_GET['categorie'] == "") {
+            if (!isset($_GET['categorie'])) {
                 $_GET['categorie'] = 'tout';
             }
-            if ($_GET['page'] == "") {
+
+            if (!isset($_GET['page'])) {
                 $_GET['page'] = 0;
             }
             $article = new Article();
             $article->getArticleLimite(5, $_GET['page'], 'ligne', $_GET['categorie']);
+            $article->countnext(5, $_GET['page'] + 5, 'ligne', $_GET['categorie']);
             ?>
         </div>
 
@@ -67,7 +71,7 @@ require('../fonctions.php');
                     </a>
                 </div>
             <?php } ?>
-            <?php if ($article->_count == 5) { ?>
+            <?php if ($article->_countnext > 0) { ?>
                 <div class="" id="right">
                     <a href="/blog/article/articles.php?<?php echo 'categorie=' . $_GET['categorie'] . '&';  ?>page=<?php echo $OFFSET + 5; ?>">
                         <i class="fas fa-chevron-right fa-4x"></i>
@@ -85,3 +89,4 @@ require('../fonctions.php');
 </body>
 
 </html>
+
