@@ -34,7 +34,7 @@
                         <?php }?>
                         <a href="/blog/article/articles.php?categorie=tout">Afficher tout les articles</a>
                     </div>
-                </div>
+                </div> 
             </div>
             <?php if($_SESSION) {?>
                 <div class="dropdown">
