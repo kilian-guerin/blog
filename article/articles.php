@@ -1,5 +1,7 @@
 <?php
 require('../fonctions.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 ?>
 
 <!--    HEAD   -->
@@ -40,10 +42,11 @@ require('../fonctions.php');
         <!--    Generation Card   -->
         <div class="articles">
             <?php
-            if ($_GET['categorie'] == "") {
+            if (!isset($_GET['categorie'])) {
                 $_GET['categorie'] = 'tout';
             }
-            if ($_GET['page'] == "") {
+
+            if (!isset($_GET['page'])) {
                 $_GET['page'] = 0;
             }
             $article = new Article();
