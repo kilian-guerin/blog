@@ -6,6 +6,12 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
 } else {
     if(isset($_POST['return'])) {
         header('Location: /blog/utilisateur/admin.php');
+    } elseif(isset($_POST['edit'])) {
+
+    } elseif(isset($_POST['delete'])) {
+        $delete = "DELETE FROM `utilisateurs` WHERE login='". $_POST['delete'] ."'";
+        $res = $GLOBALS['PDO']->exec($delete);
+        header('refresh:0');
     }
 ?>
 
@@ -25,7 +31,7 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
     <main class="admin">
         <div class="container" id="admin">
             <div class="box" id="top">
-                <h1>GÉRER LES UTILISATEURS</h1>
+                <h1>GÉRER LES UTILISATEURSS</h1>
             </div>
             <div class="box" id="middle-fix">
                 <?php
@@ -35,7 +41,7 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
 
                 foreach($list_utilisateurs as $key => $value) {
                     if($value['id_droits'] == 1337) {
-                        $role = "Admin";
+                        $role = "Administrateur";
                     } elseif ($value['id_droits'] == 42) {
                         $role = "Moderateur";
                     } elseif ($value['id_droits'] == 1 || $value['id_droits'] != 42 || $value['id_droits'] != 1337) {
@@ -50,8 +56,15 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
                             <h4> Rôle: '.$role.'</h4>
                         </div>
                         <div id="btn-right">
-                            <a href="#" class="btn yellow">Edit</a>
-                            <a href="#" class="btn red">Delete</a>
+                            <form action="" method="post">';
+                                if( $_SESSION['perms'] == 1337 ) {
+                                    echo '<button type="submit" name="edit" class="btn yellow" value="'.$value['login'].'">Edit</button>';
+                                    echo '<button type="submit" name="delete" class="btn red" value="'.$value['login'].'">Delete</button>';
+                                } elseif( $_SESSION['perms'] == 42 ) {
+                                    echo '<button type="submit" name="edit" class="btn yellow" value="'.$value['login'].'">Edit</button>';
+                                }
+                            echo '
+                            </form>
                         </div>
                     </div>';
                 }

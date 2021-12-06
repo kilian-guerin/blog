@@ -10,6 +10,8 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
         header('Location: /blog/utilisateur/admin-utilisateurs.php');
     } elseif(isset($_POST['articles'])) {
         header('Location: /blog/utilisateur/admin-articles.php');
+    } elseif(isset($_POST['categories'])) {
+        header('Location: /blog/utilisateur/admin-categories.php');
     };
 ?>
 
@@ -34,10 +36,12 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
                 </div>
                 <div class="box" id="middle">
                     <?php if($_SESSION['perms'] == 1337) { ?>
-                        <input type='submit' name='utilisateurs' id='create' style='background-image: url("/blog/img/user.svg");' autofocus value='Gérer les utilisateurs'>
-                        <input type="submit" name="articles" id="create" style="background-image: url('/blog/img/article.svg');" autofocus value="Gérer les articles">
+                        <input type='submit' name='utilisateurs' id='create' style='background-image: url("/blog/img/user.png");' autofocus value='Gérer les utilisateurs'>
+                        <input type="submit" name="articles" id="create" style="background-image: url('/blog/img/article.png');" autofocus value="Gérer les articles">
+                        <input type="submit" name="categories" id="create" style="background-image: url('/blog/img/category.png');" autofocus value="Gérer les catégories">
                     <?php } elseif ($_SESSION['perms'] == 42) { ?>
-                        <input type="submit" name="articles" id="create" style="background-image: url('/blog/img/article.svg');" autofocus value="Gérer les articles">
+                        <input type="submit" name="articles" id="create" style="background-image: url('/blog/img/article.png');" autofocus value="Gérer les articles">
+                        <input type="submit" name="categories" id="create" style="background-image: url('/blog/img/category.png');" autofocus value="Gérer les catégories">
                     <?php } ?>
                 </div>
                 <div class="box" id="middle-2">

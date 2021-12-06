@@ -889,7 +889,7 @@ main.admin div.container div.box#top h1 {
 }
 
 main.admin div.container div.box#middle {
-    height: 20%;
+    height: 28%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -913,10 +913,10 @@ main.admin div.container div.box#middle input {
     border: 2px solid rgb(151, 149, 149);
     box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
 
-    background-size: 7%;
+    background-size: 9%;
     background-repeat: no-repeat;
     background-position-x: 2%;
-    background-position-y: 75%;
+    background-position-y: 50%;
 }
 
 main.admin div.container div.box#middle select {
@@ -960,6 +960,7 @@ main.admin div.container div.box#middle-2 {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-top: 4%;
 }
 
 main.admin div.container div.box#middle-2 hr {
@@ -982,6 +983,7 @@ main.admin div.container#admin {
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 }
 
 main.admin div.container div.box#middle-fix div#btn-fix {
@@ -1030,6 +1032,27 @@ main.admin div.container div.box#middle-fix div#btn-fix div#btn-right {
     align-items: center;
     justify-content: flex-end;
 }
+
+main.admin div.container div.box#middle-fix div#btn-fix div#btn-right form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+main.admin div.container div.box#middle-fix div#btn-fix div#btn-right form button {
+    padding: 7%;
+    margin-right: 7%;
+}
+
+/* CATEGORIES */
+
+main.admin div.container#admin div.create::after {
+    position: absolute;
+    z-index: 10;
+    background-color: #000;
+    width: 10%;
+    height: 10%;
+}
+
 
 /*
         FOOTER

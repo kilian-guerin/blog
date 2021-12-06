@@ -8,7 +8,7 @@
         </div>
         <div class="container-right">
             <div class="box">
-                <a href="#">Accueil</a>
+                <a href="/blog/index.php">Accueil</a>
             </div>
             <div class="dropdown">
                 <a class="dropbtn">Articles</a>
@@ -43,6 +43,7 @@
                         <div>
                             <?php  if($_SESSION['perms'] == 1337 || $_SESSION['perms'] == 42) {
                                 echo '<a href="/blog/utilisateur/admin.php">Admin</a>';
+                                echo '<a href="/blog/article/creer-article.php">Créer un article</a>';
                             } ?>
                             <a href="/blog/utilisateur/profil.php">Profil</a>
                             <a href="/blog/disconnect.php">Se déconnecter</a>

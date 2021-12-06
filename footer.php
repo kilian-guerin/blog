@@ -24,9 +24,12 @@
                     } else {
                         echo ('
                             <a href="/blog/article/articles.php?categorie=tout"><li>Voir les articles</li></a>
-                            <a href="/blog/article/creer-article.php"><li>Écrire un article</li></a>
-                            <a href="/blog/utilisateur/profil.php"><li>Profil</li></a>
-                        ');
+                            <a href="/blog/utilisateur/profil.php"><li>Profil</li></a>'
+                        );
+                        if ($_SESSION['perms'] == 1337 || $_SESSION['perms'] == 42) {
+                            echo '<a href="/blog/utilisateur/admin.php">Admin</a>';
+                            echo '<a href="/blog/article/creer-article.php"><li>Écrire un article</li></a>';
+                        }
                     }
                 ?>
 
