@@ -61,7 +61,7 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
                                     echo '<button type="submit" name="edit" class="btn yellow" value="'.$value['login'].'">Edit</button>';
                                     echo '<button type="submit" name="delete" class="btn red" value="'.$value['login'].'">Delete</button>';
                                 } elseif( $_SESSION['perms'] == 42 ) {
-                                    echo '<button type="submit" name="edit" class="btn yellow" value="'.$value['login'].'">Edit</button>';
+                                    echo '<button type="submit" name="edit" class="btn yellow" value="'.$value['id'].'">Edit</button>';
                                 }
                             echo '
                             </form>
