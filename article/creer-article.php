@@ -4,7 +4,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 $article = new Article();
 if (isset($_POST['submit'])){
-$article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id'],$_POST['choose-article']);}
+    $article->insArticle($_POST['desc-article'],$_POST['title-article'],$_SESSION['id'],$_POST['choose-article']);
+} elseif(isset($_POST['back'])) {
+    header('Location: /blog/index.php');
+}
 ?>
 
 <!--    HEAD   -->
@@ -42,8 +45,8 @@ $article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id
                     <textarea name="desc-article" placeholder="Écrivez votre article"></textarea>
                 </div>
                 <div class="box" id="bottom">
-                    <input type="submit" name="submit" id="create" autofocus value="Créer l'article">
-                    <input type="submit" name="submit" id="create" autofocus value="Revenir à la page principale">
+                    <input type="submit" name="submit" class="btn green" autofocus value="Créer l'article">
+                    <input type="submit" name="back" class="btn orange" autofocus value="Revenir à la page principale">
                 </div>
             </form>
         </div>
