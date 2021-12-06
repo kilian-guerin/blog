@@ -13,134 +13,212 @@ html, body {
     height: 100%;
 }
 
+/* 
+    BTN LIBRAIRY
+*/
+
+.btn {
+    border-radius: 5px;
+    padding: 3%;
+    font-size: 20px;
+    text-decoration: none;
+    margin: 1%;
+    color: #fff;
+    position: relative;
+    display: inline-block;
+    border: none;
+    font-family: 'Comfortaa';
+}
+
+.btn:active, .btn::selection {
+    transform: translate(0px, 5px);
+    -webkit-transform: translate(0px, 5px);
+    box-shadow: 0px 1px 0px 0px;
+    border: none;
+}
+
+.blue {
+    background-color: #55acee;
+    box-shadow: 0px 5px 0px 0px #3C93D5;
+}
+
+.blue:hover {
+    background-color: #6FC6FF;
+}
+
+.green {
+    background-color: #2ecc71;
+    box-shadow: 0px 5px 0px 0px #15B358;
+}
+
+.green:hover {
+    background-color: #48E68B;
+}
+
+.red {
+    background-color: #e74c3c;
+    box-shadow: 0px 5px 0px 0px #CE3323;
+}
+
+.red:hover {
+    background-color: #FF6656;
+}
+
+.purple {
+    background-color: #9b59b6;
+    box-shadow: 0px 5px 0px 0px #82409D;
+}
+
+.purple:hover {
+    background-color: #B573D0;
+}
+
+.orange {
+    background-color: #e67e22;
+    box-shadow: 0px 5px 0px 0px #CD6509;
+}
+
+.orange:hover {
+    background-color: #FF983C;
+}
+
+.yellow {
+    background-color: #f1c40f;
+    box-shadow: 0px 5px 0px 0px #D8AB00;
+}
+
+.yellow:hover {
+    background-color: #FFDE29;
+}
+
 /*
         HEADER
  */
 header {
-    height:8%;
-    width:100%;
-    background-color:transparent;
-    position:absolute;
-    z-index:999;
-    color:#000;
-    font-family:Comfortaa;
+    height: 8%;
+    width: 100%;
+    background-color: transparent;
+    position: absolute;
+    z-index: 999;
+    color: #000;
+    font-family: Comfortaa;
 }
 
 header nav.navbar {
-    width:100%;
-    height:100%;
-    display:flex;
-    flex-direction:row;
-    box-shadow:0 0 50px 1px rgba(0,0,0,0.7);
-    background-color:#fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 0 0 50px 1px rgba(0, 0, 0, 0.7);
+    background-color: #fff;
 }
 
 header nav.navbar div.container-left {
-    height:100%;
-    width:50%;
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 header nav.navbar div.container-left a {
-    font-family:Comfortaa;
-    font-size:200%;
-    padding-left:3%;
-    color:#000;
-    text-decoration:none;
+    font-family: Comfortaa;
+    font-size: 200%;
+    padding-left: 3%;
+    color: #000;
+    text-decoration: none;
 }
 
 header nav.navbar div.container-right {
-    height:100%;
-    width:50%;
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
+    height: 100%;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
 
 header nav.navbar div.container-right div.box {
-    height:100%;
-    width:15%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    height: 100%;
+    width: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 header nav.navbar div.container-right div.box a {
-    color:#27283c;
-    text-decoration:none;
-    font-size:105%;
+    color: #27283c;
+    text-decoration: none;
+    font-size: 105%;
     transition-duration: 300ms;
 }
 
 header nav.navbar div.container-right div.box:hover a {
     color: #000;
-    font-size:105%;
+    font-size: 105%;
 }
 
 header nav.navbar div.container-right .dropdown {
-    display:flex;
-    height:100%;
-    width:14%;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    font-size:105%;
+    display: flex;
+    height: 100%;
+    width: 14%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 105%;
 }
 
 header nav.navbar div.container-right .dropdown-content {
-    display:none;
-    position:absolute;
-    top:100%;
-    background-color:#fff;
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: #fff;
     border-top: #27283c 3px solid;
-    min-width:auto;
-    box-shadow:0 8px 16px 0 rgba(0,0,0,0.2);
-    z-index:1;
+    min-width: auto;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 header nav.navbar div.container-right .dropdown-content h3 {
     font-family: Comfortaa;
-    padding-top:4%;
-    padding-bottom:4%;
-    padding-left:4%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 4%;
 }
 
 header nav.navbar div.container-right .dropdown-content a {
-    color:#000;
-    padding-top:4%;
-    padding-bottom:4%;
-    padding-left:4%;
-    text-decoration:none;
-    display:block;
+    color: #000;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    padding-left: 4%;
+    text-decoration: none;
+    display: block;
 }
 
 header nav.navbar div.container-right .dropdown-content a:hover {
-    background-color:#b9b8b8;
-    color:#27283c;
+    background-color: #b9b8b8;
+    color: #27283c;
 }
 
 header nav.navbar div.container-right .dropdown:hover .dropdown-content {
-    display:flex;
-    flex-direction:row;
+    display: flex;
+    flex-direction: row;
 }
 
 header nav.navbar div.container-right .dropdown:hover .dropdown-content#moyen {
-    color:#000;
-    padding:0.1%;
-    text-decoration:none;
-    display:block;
+    color: #000;
+    padding: 0.1%;
+    text-decoration: none;
+    display: block;
     right: 1%;
 }
 
 header nav.navbar div.container-right .dropdown-content#moyen a {
-    color:#000;
+    color: #000;
     padding-right: 20%;
 }
 
 header nav.navbar div.container-right .dropdown:hover .dropbtn a {
-    color:#cacaca;
+    color: #cacaca;
 }
 
 /*
@@ -186,10 +264,10 @@ section.container {
 }
 
 section.container div.container-1 h2#title {
-    padding-top: 5%;
+    margin-top: 3%;
     font-family: 'Comfortaa';
     font-size: 225%;
-    margin-bottom: 3%;
+    margin-bottom: 5%;
 }
 
 section.container div.container-1 {
@@ -227,6 +305,7 @@ section.container div.container-2 {
     height: 200px;
     object-fit: cover;
 }
+
 .card-body {
     display: flex;
     flex-direction: column;
@@ -250,9 +329,11 @@ section.container div.container-2 {
 .tag-teal {
     background-color: #47bcd4;
 }
+
 .tag-purple {
     background-color: #5e76bf;
 }
+
 .tag-blue {
     background-color: #4666ce;
 }
@@ -270,6 +351,7 @@ section.container div.container-2 {
     font-size: 100%;
     margin: 0 0 40px;
 }
+
 .user {
     display: flex;
     margin-top: auto;
@@ -283,9 +365,11 @@ section.container div.container-2 {
     height: 15%;
     margin-right: 10px;
 }
+
 .user-info h5 {
     margin: 0;
 }
+
 .user-info small {
     color: #545d7a;
 }
@@ -351,7 +435,7 @@ main.login div.container div.box#middle input {
     padding-left: 2%;
     padding-right: 2%;
     border: none;
-    background-color: rgba(247,247,249,.7);
+    background-color: rgba(247, 247, 249, .7);
     font-family: "Comfortaa";
     color: grey;
     border-color: #ccc;
@@ -494,7 +578,7 @@ section.container div.articles div.article-card a {
 
 section.container div.articles div.article-card div.box#right {
     height: 100%;
-    width:8%;
+    width: 8%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -520,6 +604,7 @@ section.container div.pagination {
     justify-content: center;
     align-items: center;
 }
+
 section.container div.pagination div#right, div#left {
     margin: 2%;
 }
@@ -575,7 +660,7 @@ main.create-article div.container div.box#top h1 {
 }
 
 main.create-article div.container div.box#middle {
-    height:40%;
+    height: 40%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -589,7 +674,7 @@ main.create-article div.container div.box#middle input {
     padding-left: 2%;
     padding-right: 2%;
     border: none;
-    background-color: rgba(247,247,249,.7);
+    background-color: rgba(247, 247, 249, .7);
     font-family: "Comfortaa";
     color: grey;
 
@@ -603,7 +688,7 @@ main.create-article div.container div.box#middle select {
     padding-left: 2%;
     padding-right: 2%;
     margin-bottom: 3.2%;
-    background-color: rgba(247,247,249,.7);
+    background-color: rgba(247, 247, 249, .7);
     font-family: "Comfortaa";
     color: grey;
 
@@ -617,7 +702,7 @@ main.create-article div.container div.box#middle textarea {
     height: 100%;
     padding: 2%;
     border: none;
-    background-color: rgba(247,247,249,.7);
+    background-color: rgba(247, 247, 249, .7);
     font-family: "Comfortaa";
     color: grey;
     border: 2px solid rgb(151, 149, 149);
@@ -804,7 +889,7 @@ main.admin div.container div.box#top h1 {
 }
 
 main.admin div.container div.box#middle {
-    height:20%;
+    height: 20%;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -819,7 +904,7 @@ main.admin div.container div.box#middle input {
     padding-left: 2%;
     padding-right: 2%;
     border: none;
-    background-color: rgba(247,247,249,.7);
+    background-color: rgba(247, 247, 249, .7);
     font-family: "Comfortaa";
     font-weight: bold;
     font-size: 100%;
@@ -840,7 +925,7 @@ main.admin div.container div.box#middle select {
     padding-left: 2%;
     padding-right: 2%;
     margin-bottom: 3.2%;
-    background-color: rgba(247,247,249,.7);
+    background-color: rgba(247, 247, 249, .7);
     font-family: "Comfortaa";
     color: grey;
 
@@ -854,7 +939,7 @@ main.admin div.container div.box#middle textarea {
     height: 100%;
     padding: 2%;
     border: none;
-    background-color: rgba(247,247,249,.7);
+    background-color: rgba(247, 247, 249, .7);
     font-family: "Comfortaa";
     color: grey;
     border: 2px solid rgb(151, 149, 149);
@@ -868,47 +953,6 @@ main.admin div.container div.box#bottom {
     display: flex;
     justify-content: space-around;
     align-items: center;
-}
-
-main.admin div.container div.box#bottom input {
-    display: inline-block;
-    margin-bottom: 0;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    background-image: none;
-    border: 1px solid transparent;
-    padding: 3% 6%;
-    font-size: 92%;
-    line-height: 1.42857143;
-    border-radius: 4px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    font-weight: bold;
-    font-family: "Comfortaa";
-}
-
-main.admin div.container div.box#bottom input#create {
-    background-color: #5867dd;
-    border-color: #5867dd;
-    color: white;
-    border: 2px solid #5867dd;
-    box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2);
-    transition-duration: 300ms;
-    margin-right: 6%;
-}
-
-main.admin div.container div.box#bottom input#create:hover {
-    transition-duration: 300ms;
-    background-color: white;
-    border-color: black;
-    color: black;
 }
 
 main.admin div.container div.box#middle-2 {
@@ -929,32 +973,63 @@ main.admin div.container div.box#middle-2 span {
     padding: 5%;
 }
 
-main.admin div.container div.box#middle-fix {
-    width: 100%;
-    height: 80%;
+main.admin div.container#admin {
+    width: 50%;
+    height: 100%;
+    background-color: white;
+    z-index: 2;
+    box-shadow: 0px 0px 25px 1px black;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    overflow: scroll;
+    align-items: center;
 }
 
-main.admin div.container div.box#middle-fix input#btn-fix {
+main.admin div.container div.box#middle-fix div#btn-fix {
     width: 80%;
     height: auto;
-    margin-top: 0.3%;
-    background-color: rgba(247,247,249,.7);
+    margin-top: 1.5%;
+    background-color: rgba(247, 247, 249, .7);
     font-family: "Comfortaa";
     font-weight: bold;
     font-size: 100%;
     color: grey;
 
     padding: 1%;
+    text-align: start;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     border: 2px solid rgb(151, 149, 149);
     box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.2)
 }
 
+main.admin div.container div.box#middle-fix::-webkit-scrollbar {
+    width: 0px;
+}
+
+main.admin div.container div.box#middle-fix {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    overflow: scroll;
+}
+
+main.admin div.container div.box#middle-fix div#btn-fix div#btn-left {
+    width: 50%;
+    height: 100%;
+}
+
+main.admin div.container div.box#middle-fix div#btn-fix div#btn-right {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 
 /*
         FOOTER
@@ -962,7 +1037,7 @@ main.admin div.container div.box#middle-fix input#btn-fix {
 footer {
     height: 80%;
     width: 100%;
-    background: -webkit-linear-gradient(left top,#79799c,#131327);
+    background: -webkit-linear-gradient(left top, #79799c, #131327);
 }
 
 footer div#top svg {

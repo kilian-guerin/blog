@@ -2,8 +2,9 @@
 require ('../fonctions.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+$article = new Article();
+$article->insArticle($_POST['desc-article'],$_POST['desc-article'],$_SESSION['id'],$idcat);
 ?>
-
 <!--    HEAD   -->
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,6 @@ ini_set('display_errors', 1);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
-
 <body>
     <main class="create-article">
         <div class="container" id="forms">

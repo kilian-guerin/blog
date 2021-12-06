@@ -33,9 +33,12 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
                     <h1>ADMINISTRATION</h1>
                 </div>
                 <div class="box" id="middle">
-                    <input type="submit" name="utilisateurs" id="create" style="background-image: url('/blog/img/user.svg');" autofocus value="Gérer les utilisateurs">
-
-                    <input type="submit" name="articles" id="create" style="background-image: url('/blog/img/article.svg');" autofocus value="Gérer les articles">
+                    <?php if($_SESSION['perms'] == 1337) { ?>
+                        <input type='submit' name='utilisateurs' id='create' style='background-image: url("/blog/img/user.svg");' autofocus value='Gérer les utilisateurs'>
+                        <input type="submit" name="articles" id="create" style="background-image: url('/blog/img/article.svg');" autofocus value="Gérer les articles">
+                    <?php } elseif ($_SESSION['perms'] == 42) { ?>
+                        <input type="submit" name="articles" id="create" style="background-image: url('/blog/img/article.svg');" autofocus value="Gérer les articles">
+                    <?php } ?>
                 </div>
                 <div class="box" id="middle-2">
                     <hr></hr>
@@ -43,7 +46,7 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
                     <hr></hr>
                 </div>
                 <div class="box" id="bottom">
-                    <input type="submit" name="submit" id="create" autofocus value="Revenir à la page principale">
+                    <input type="submit" name="submit" class="btn blue" autofocus value="Revenir à la page principale">
                 </div>
             </form>
         </div>

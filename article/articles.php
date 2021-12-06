@@ -39,112 +39,43 @@ require('../fonctions.php');
         </div>
         <!--    Generation Card   -->
         <div class="articles">
-            <div class="article-card">
-                <a href="../index.php">
-                    <div class="box" id="right">
-                    <span class="fa-stack fa-2x">
-                        <i class="fas fa-chevron-left fa-stack-2x"></i>
-                        <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
-                    </span>
-                    </div>
-                    <div class="box" id="left">
-                        <h2>Title</h2>
-                        <span>
-                            Ceci est un article
-                        </span>
-                        <div class="box" id="bottom">
-                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="article-card">
-                <a href="../index.php">
-
-                    <div class="box" id="right">
-                        <i class="fab fa-apple fa-4x"></i>
-                    </div>
-                    <div class="box" id="left">
-                        <h2>Title</h2>
-                        <span>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. A diam
-                            sollicitudin tempor id eu nisl. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus...
-                        </span>
-                        <div class="box" id="bottom">
-                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="article-card">
-                <a href="../index.php">
-                    <div class="box" id="right">
-                        <i class="fas fa-adjust fa-4x"></i>
-                    </div>
-                    <div class="box" id="left">
-                        <h2>Title</h2>
-                        <span>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. A diam
-                            sollicitudin tempor id eu nisl. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus...
-                        </span>
-                        <div class="box" id="bottom">
-                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="article-card">
-                <a href="../index.php">
-
-                    <div class="box" id="right">
-                        <i class="fab fa-dev fa-4x"></i>
-                    </div>
-                    <div class="box" id="left">
-                        <h2>Title</h2>
-                        <span>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. A diam
-                            sollicitudin tempor id eu nisl. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus...
-                        </span>
-                        <div class="box" id="bottom">
-                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="article-card">
-                <a href="../index.php">
-                    <div class="box" id="right">
-                        <i class="fab fa-dev fa-4x"></i>
-                    </div>
-                    <div class="box" id="left">
-                        <h2>Title</h2>
-                        <span>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                            et dolore magna aliqua. Id nibh tortor id aliquet lectus proin nibh nisl condimentum. A diam
-                            sollicitudin tempor id eu nisl. Gravida in fermentum et sollicitudin ac orci phasellus egestas tellus...
-                        </span>
-                        <div class="box" id="bottom">
-                            <h4>Posté par Lucien le 2021/06/03 - 12:19:43</h4>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            <?php
+            if ($_GET['categorie'] == "") {
+                $_GET['categorie'] = 'tout';
+            }
+            if ($_GET['page'] == "") {
+                $_GET['page'] = 0;
+            }
+            $article = new Article();
+            $article->getArticleLimite(5, $_GET['page'], 'ligne', $_GET['categorie']);
+            ?>
         </div>
-        <div class="pagination">
-            <div class="" id="left">
-                <a href="">
-                    <i class="fas fa-chevron-left fa-4x"></i>
-                </a>
+
+        <?php
+        $OFFSET = $_GET['page'];
+        if ($OFFSET <= 0) {
+            $OFFSET = 0;
+            $_GET['page'] = 0;
+        }
+        
+        ?>
+            <div class="pagination">
+                <?php if ($_GET['page'] > 0) { ?>
+                <div class="" id="left">
+                    <a href="/blog/article/articles.php?<?php echo 'categorie=' . $_GET['categorie'] . '&';  ?>page=<?php echo $OFFSET - 5; ?>">
+                        <i class="fas fa-chevron-left fa-4x"></i>
+                    </a>
+                </div>
+            <?php } ?>
+            <?php if ($article->_count == 5) { ?>
+                <div class="" id="right">
+                    <a href="/blog/article/articles.php?<?php echo 'categorie=' . $_GET['categorie'] . '&';  ?>page=<?php echo $OFFSET + 5; ?>">
+                        <i class="fas fa-chevron-right fa-4x"></i>
+                    </a>
+                </div>
             </div>
-            <div class="" id="right">
-                <a href="">
-                    <i class="fas fa-chevron-right fa-4x"></i>
-                </a>
-            </div>
-        </div>
+        <?php } ?>
+
         <!--   Fin Generation Card   -->
     </section>
 

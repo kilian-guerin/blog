@@ -67,6 +67,7 @@ class Module_Connexion
                     $info_util = $res->fetchAll(PDO::FETCH_ASSOC);
 
                     $_SESSION['email'] = $info_util[0]['email'];
+                    $_SESSION['id'] = $info_util[0]['id'];
                     $_SESSION['login'] = $info_util[0]['login'];
                     $_SESSION['perms'] = $info_util[0]['id_droits'];
 
@@ -166,7 +167,7 @@ class Module_Inscription
                                 $stmt = $GLOBALS['PDO']->prepare($req);
                                 $stmt->execute([
                                     ':login' => $this->_login,
-                                    ':password' => password_hash($this->_password,PASSWORD_DEFAULT),
+                                    ':password' => password_hash($this->_password, PASSWORD_DEFAULT),
                                     ':email' => $this->_email,
                                     ':id' => $this->_id = 1,
                                 ]);
@@ -193,7 +194,7 @@ class Module_Inscription
 class Article
 {
 
-    // private $_contenu;
+    public $_count;
     // private $_titre;
     // private $_idutil;
     // private $_idcat;
@@ -216,13 +217,17 @@ class Article
         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getCategorie() {
-        $req = "SELECT * FROM `categories`";
-        $stmt = $GLOBALS['PDO']->query($req);
-        $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $list_articles;
+    public function insArticle(string $article, string $titre, int $id_utilisateur, int $id_categorie)
+    {
+        $req = "INSERT INTO `articles`(`article`, `titre`, `id_utilisateur`, `id_categorie`) VALUES (:article,:titre,:id_utilisateur,:id_categorie)";
+        $stmt = $GLOBALS['PDO']->prepare($req);
+        $stmt->execute([
+            ':article' => $article,
+            ':titre' => $titre,
+            ':id_utilisateur' => $id_utilisateur,
+            ':id_categorie' => $id_categorie,
+        ]);
     }
-
 
     public function getArticleLimite(int $limit, int $OFFSET = 0, string $type, string $categorie)
     {
@@ -233,6 +238,7 @@ class Article
         }
         $stmt = $GLOBALS['PDO']->query($req);
         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->_count = count($list_articles);
         if ($type == 'card') {
             for ($i = 0; $i < count($list_articles); $i++) { ?>
                 <div class="card">
@@ -259,7 +265,7 @@ class Article
             <?php
             }
         } elseif ($type == 'ligne') {
-            for ($i = 0; $i < count($list_articles); $i++) { ?>
+            for ($i = 0; $i < count($list_articles); $i++) {  ?>
                 <div class="article-card">
                     <a href="../index.php">
                         <div class="box" id="right">
@@ -273,6 +279,9 @@ class Article
                             <span>
                                 <?php echo substr($list_articles[$i]['article'], 0, 100) . "..." ?>
                             </span>
+                            <div class="box" id="bottom">
+                                <h4>Posté par <?php echo $list_articles[$i]['login'] . ' le ' . $list_articles[$i]['date'] ?></h4>
+                            </div>
                         </div>
                     </a>
                 </div>
