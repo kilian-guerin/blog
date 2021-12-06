@@ -230,19 +230,26 @@ class Article
 
     public function insArticle(string $article, string $titre, int $id_utilisateur, int $id_categorie)
     {
-        $req = "INSERT INTO `articles`(`article`, `titre`, `id_utilisateur`, `id_categorie`) VALUES (:article,:titre,:id_utilisateur,:id_categorie)";
-        $stmt = $GLOBALS['PDO']->prepare($req);
-        $stmt->execute([
-            ':article' => $article,
-            ':titre' => $titre,
-            ':id_utilisateur' => $id_utilisateur,
-            ':id_categorie' => $id_categorie,
-        ]);
-        $this->_Malert = 'Articles crée';
-        $this->_Talert = 1;
+        if ($article == "") {
+            $this->_Malert = 'Veuillez remplir le champ "Texte"';
+        } elseif ($titre == "") {
+            $this->_Malert = 'Veuillez remplir le champ "Titre"';
+        } else {
+            $req = "INSERT INTO `articles`(`article`, `titre`, `id_utilisateur`, `id_categorie`) VALUES (:article,:titre,:id_utilisateur,:id_categorie)";
+            $stmt = $GLOBALS['PDO']->prepare($req);
+            $stmt->execute([
+                ':article' => $article,
+                ':titre' => $titre,
+                ':id_utilisateur' => $id_utilisateur,
+                ':id_categorie' => $id_categorie,
+            ]);
+            $this->_Malert = 'Articles crée';
+            $this->_Talert = 1;
+        }
     }
 
-    public function countnext(int $limit, int $OFFSET = 0, string $type, string $categorie) {
+    public function countnext(int $limit, int $OFFSET = 0, string $type, string $categorie)
+    {
         if ($categorie == 'tout') {
             $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` LIMIT $limit OFFSET $OFFSET";
         } else {
