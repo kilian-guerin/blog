@@ -1,5 +1,7 @@
 <?php
 require('config.php');
+$PATH = '';
+
 
 class Module_Connexion
 {
@@ -223,9 +225,33 @@ class Article
 
     public function getArticleParId(int $id)
     {
-        $req = "SELECT * FROM `articles` WHERE `id`=" . $id . "";
+        $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` WHERE `articles`.`id` = $id";
         $stmt = $GLOBALS['PDO']->query($req);
-        $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $article = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+        <main class="view-article">
+            <div class="container-top">
+                <div class="box">
+                    <h2><?php echo $article[0]['titre']; ?></h2>
+                </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill="#fff" fill-opacity="1" d="M0,32L34.3,48C68.6,64,137,96,206,112C274.3,128,343,128,411,112C480,96,549,64,617,90.7C685.7,117,754,203,823,208C891.4,213,960,139,1029,128C1097.1,117,1166,171,1234,160C1302.9,149,1371,75,1406,37.3L1440,0L1440,320L1405.7,320C1371.4,320,1303,320,1234,320C1165.7,320,1097,320,1029,320C960,320,891,320,823,320C754.3,320,686,320,617,320C548.6,320,480,320,411,320C342.9,320,274,320,206,320C137.1,320,69,320,34,320L0,320Z"></path>
+            </svg>
+        </main>
+
+        <section class="view-article">
+            <div class="container">
+                <h2 id="title"><?php echo $article[0]['titre'] ?></h2>
+                <h4 id="sous-title">Crée par <?php echo $article[0]['login']; ?> le <?php echo $article[0]['date']; ?></h4>
+            </div>
+            <div class="container-2">
+                <span>
+                <?php echo $article[0]['article']; ?>
+                </span>
+            </div>
+        </section>
+        <?php
     }
 
     public function insArticle(string $article, string $titre, int $id_utilisateur, int $id_categorie)
@@ -277,7 +303,7 @@ class Article
                         <img src="https://aitechnologiesng.com/wp-content/uploads/2021/01/Software-Development-Training-in-Abuja1-1024x768.jpg" alt="city" />
                     </div>
                     <div class="card-body">
-                        <a href="#main"><span class="tag tag-blue"><?php echo $list_articles[$i]['categorie'] ?></span></a>
+                        <a href="/blog/article/articles.php?categorie=<?= $list_articles[$i]['categorie']?>"><span class="tag tag-blue"><?php echo $list_articles[$i]['categorie'] ?></span></a>
                         <h2>
                             <?php echo $list_articles[$i]['titre'] ?>
                         </h2>
@@ -298,7 +324,7 @@ class Article
         } elseif ($type == 'ligne') {
             for ($i = 0; $i < count($list_articles); $i++) {  ?>
                 <div class="article-card">
-                    <a href="../index.php">
+                    <a href="/blog/article/article.php?id=<?php echo $list_articles[$i]['id'] ?>">
                         <div class="box" id="right">
                             <span class="fa-stack fa-2x">
                                 <i class="fas fa-chevron-left fa-stack-2x"></i>

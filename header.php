@@ -26,11 +26,11 @@
                     </div>
                     <div>
                         <h3>Les derniers articles</h3>
-                        <?php $req = "SELECT `titre` FROM `articles` ORDER BY `date` DESC LIMIT 4";
+                        <?php $req = "SELECT `titre`, `id` FROM `articles` ORDER BY `date` DESC LIMIT 4";
                         $stmt = $GLOBALS['PDO']->query($req);
                         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         for ($i = 0; $i < count($list_articles); $i++ ) { ?>
-                        <a href="#"><?php echo $list_articles[$i]['titre']; ?></a>
+                        <a href="/blog/article/article.php?id=<?php echo $list_articles[$i]['id'] ?>"><?php echo $list_articles[$i]['titre']; ?></a>
                         <?php }?>
                         <a href="/blog/article/articles.php?categorie=tout">Afficher tout les articles</a>
                     </div>
