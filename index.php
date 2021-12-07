@@ -31,7 +31,7 @@ require('header.php');
 
     <section class="container">
         <div class="container-1">
-            <h2 id="title">Nos derniers articles</h2>
+            <h2 class="title">Nos derniers articles</h2>
         </div>
         <!--    Generation Card   -->
         <div class="container-2">

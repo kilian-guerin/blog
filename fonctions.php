@@ -228,6 +228,10 @@ class Article
         $req = "SELECT `articles`.`id`, `articles`.`article`,`articles`.`titre`,`articles`.`date`, `categories`.`nom` AS 'categorie', `utilisateurs`.`login`  FROM `articles` INNER JOIN `categories` ON `articles`.`id_categorie` = `categories`.`id` INNER JOIN `utilisateurs` ON `articles`.`id_utilisateur` = `utilisateurs`.`id` WHERE `articles`.`id` = $id";
         $stmt = $GLOBALS['PDO']->query($req);
         $article = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $creq = "SELECT `commentaire`, `id_article`, `login`, `commentaires`.`date` FROM `commentaires` INNER JOIN `utilisateurs` ON commentaires.id_utilisateur = utilisateurs.id INNER JOIN `articles` ON commentaires.id_article = articles.id WHERE id_article=$id";
+        $cstmt = $GLOBALS['PDO']->query($creq);
+        $commentaire = $cstmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
         <main class="view-article">
             <div class="container-top">
@@ -242,13 +246,29 @@ class Article
 
         <section class="view-article">
             <div class="container">
-                <h2 id="title"><?php echo $article[0]['titre'] ?></h2>
+                <h2 class="title"><?php echo $article[0]['titre'] ?></h2>
                 <h4 id="sous-title">Crée par <?php echo $article[0]['login']; ?> le <?php echo $article[0]['date']; ?></h4>
             </div>
             <div class="container-2">
                 <span>
                     <?php echo $article[0]['article']; ?>
                 </span>
+            </div>
+            <h3 class="title">Réagir à l'article</h3>
+            <textarea minlength="5" rows="10" cols="45"></textarea>
+            <div class="container-2" id="container-commentaire">
+                <?php foreach ($commentaire as $value) { ?>
+                    <div class="container-3">
+                        <div class="box">
+                            <span>
+                                <?= $value['commentaire'] ?>
+                            </span>
+                            <div class="box" id="bottom">
+                                <h5>Posté par <?php echo $value['login'] . ' le ' . $value['date'] ?></h5>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         </section>
         <?php
@@ -336,7 +356,7 @@ class Article
                         <div class="box" id="left">
                             <h2> <?php echo $list_articles[$i]['titre'] ?></h2>
                             <span>
-                            <?= strlen($list_articles[$i]['article']) > 100 ? substr($list_articles[$i]['article'], 0, 100) . "..." : $list_articles[$i]['article']  ?>
+                                <?= strlen($list_articles[$i]['article']) > 100 ? substr($list_articles[$i]['article'], 0, 100) . "..." : $list_articles[$i]['article']  ?>
                             </span>
                             <div class="box" id="bottom">
                                 <h4>Posté par <?php echo $list_articles[$i]['login'] . ' le ' . $list_articles[$i]['date'] ?></h4>
