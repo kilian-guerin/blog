@@ -89,23 +89,6 @@ class Module_Connexion
     }
 }
 
-class Modif_Profil {
-
-    private $_id;
-
-    function __construct(int $id)
-    {
-        $this->_id = $id;
-    }
-
-    public function modif_utilisateur() {
-        $req = "SELECT * FROM `utilisateurs` WHERE `id`=$this->_id";
-        $stmt = $GLOBALS['PDO']->query($req);
-        $list_util = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-}
-
 class Module_Inscription
 {
 
@@ -209,8 +192,6 @@ class Module_Inscription
         }
     }
 }
-
-
 
 class Article
 {
