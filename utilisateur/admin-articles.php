@@ -49,10 +49,10 @@ if (($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms
                         <div id="btn-right">
                             <form action="" method="post">';
                                 if ($_SESSION['perms'] == 1337) {
-                                    echo '<a href="" id="edit-button" class="btn yellow">Edit</a>';
+                                    echo '<a href="/blog/article/creer-article.php?id='.$value['id'].'" id="edit-button" class="btn yellow">Edit</a>';
                                     echo '<button type="submit" name="delete" value="' . $value['id'] . '" class="btn red">Delete</button>';
                                 } elseif ($_SESSION['perms'] == 42) {
-                                    echo '<a href="" class="btn yellow">Edit</a>';
+                                    echo '<a href="/blog/article/creer-article.php?id='.$value['id'].'" class="btn yellow">Edit</a>';
                                 }
                                 echo '
                             </form>

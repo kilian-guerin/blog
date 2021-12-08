@@ -201,8 +201,8 @@ class Article
 
     public $_count;
     public $_countnext;
-    private $_Malert;
-    private $_Talert;
+    private $_Malert = "Article modifié";
+    private $_Talert = 1;
     // private $_idcat;
     // private $_id;
 

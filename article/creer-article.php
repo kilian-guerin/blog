@@ -2,19 +2,27 @@
 require('../fonctions.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-var_dump($_SESSION);
 $article = new Article();
-if (isset($_POST['submit'])) {
+if (isset($_POST["submit"]) && $_POST["submit"] == "Créer l'article" ) {
     $article->insArticle($_POST['desc-article'], $_POST['title-article'], $_SESSION['id'], $_POST['choose-article']);
 } elseif (isset($_POST['back'])) {
     header('Location: /blog/index.php');
 } elseif (isset($_GET['id']) && $_SESSION['perms'] == 1337) {
     $idarticle = $_GET['id'];
-    echo $idarticle;
     $req = "SELECT * FROM `articles` WHERE `id`= $idarticle";
     $stmt = $GLOBALS['PDO']->query($req);
     $arti = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($arti);
+}
+
+if (isset($_POST["submit"]) && $_POST["submit"] == "Modifier l'article" ) {
+    $req = "UPDATE `articles` SET `article`=:article,`titre`=:titre,`id_categorie`=:idcat WHERE `id`=$idarticle";
+    $stmt = $GLOBALS['PDO']->prepare($req);
+    $stmt->execute([
+        ':article' => $_POST['desc-article'],
+        ':titre' => $_POST['title-article'],
+        ':idcat' => $_POST['choose-article'],
+    ]);
+    header('refresh:2');
 }
 ?>
 
@@ -34,7 +42,7 @@ if (isset($_POST['submit'])) {
 <body>
     <main class="create-article">
         <div class="container" id="forms">
-            <form action="#" method="post" class="forms">
+            <form action="" method="post" class="forms">
                 <?php if (isset($_POST['submit'])) {
                     $article->alerts();
                 } ?>
@@ -50,15 +58,16 @@ if (isset($_POST['submit'])) {
                         $stmt = $GLOBALS['PDO']->query($req);
                         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         for ($i = 0; $i < count($list_articles); $i++) { ?>
-                            <option value="<?php echo $list_articles[$i]['id'] ?>"><?= $list_articles[$i]['nom'] ?></option> <?php
-                                                                                                                                } ?>
+                            <option value="<?php echo $list_articles[$i]['id'] ?>" <?php if (isset($arti[0]['id_categorie'])) {
+                                                                                        $arti[0]['id_categorie'] == $list_articles[$i]['id'] ? "selected" : "";
+                                                                                    } ?>><?= $list_articles[$i]['nom'] ?></option> <?php } ?>
                     </select>
                     <textarea name="desc-article" placeholder="Écrivez votre article"><?= isset($arti[0]['article']) ? $arti[0]['article'] : ""  ?></textarea>
                 </div>
                 <div class="box" id="bottom">
                     <?php if ((isset($_GET['id']) && $_SESSION['perms'] == 1337)) { ?>
-                    <input type="submit" name="submit" class="btn green" autofocus value="Modifier l'article"> <?php } else { ?>
-                    <input type="submit" name="submit" class="btn green" autofocus value="Créer l'article">
+                        <input type="submit" name="submit" class="btn green" autofocus value="Modifier l'article"> <?php } else { ?>
+                        <input type="submit" name="submit" class="btn green" autofocus value="Créer l'article">
                     <?php } ?>
                     <input type="submit" name="back" class="btn orange" autofocus value="Revenir à la page principale">
                 </div>
