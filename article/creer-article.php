@@ -13,8 +13,8 @@ if (isset($_POST['submit'])) {
     echo $idarticle;
     $req = "SELECT * FROM `articles` WHERE `id`= $idarticle";
     $stmt = $GLOBALS['PDO']->query($req);
-    $article = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($article);
+    $arti = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($arti);
 }
 ?>
 
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
                     <h1>CRÉER VOTRE ARTICLE</h1><br>
                 </div>
                 <div class="box" id="middle">
-                    <input type="text" name="title-article" placeholder="Titre de l'article" value="<?= isset($article[0]['titre']) ? $article[0]['titre'] : "" ?>"><br>
+                    <input type="text" name="title-article" placeholder="Titre de l'article" value="<?= isset($arti[0]['titre']) ? $arti[0]['titre'] : ""  ?>"><br>
                     <select name="choose-article">
                         <?php
                         $req = "SELECT * FROM `categories`";
@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
                             <option value="<?php echo $list_articles[$i]['id'] ?>"><?= $list_articles[$i]['nom'] ?></option> <?php
                                                                                                                                 } ?>
                     </select>
-                    <textarea name="desc-article" placeholder="Écrivez votre article"><?= $article[0]['article'] ?></textarea>
+                    <textarea name="desc-article" placeholder="Écrivez votre article"><?= isset($arti[0]['article']) ? $arti[0]['article'] : ""  ?></textarea>
                 </div>
                 <div class="box" id="bottom">
                     <?php if ((isset($_GET['id']) && $_SESSION['perms'] == 1337)) { ?>
