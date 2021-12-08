@@ -7,7 +7,11 @@ if (isset($_GET['id'])) {
 }
 $util = new Modif_Profil($idutil);
 $util->get_utilisateur();
-if (isset($_POST['submit'])) {$util->modif_util($_POST['email'], $_POST['password'], $_POST['password_confirmation'], $_POST['login'], $_POST['droit']);}
+if (isset($_POST['submit'])) {
+    $util->modif_util($_POST['email'], $_POST['password'], $_POST['password_confirmation'], $_POST['login'], $_POST['droit']);
+} else if(isset($_POST['return'])) {
+    header('Location: /blog/index.php');
+}
 ?>
 
 <!--    HEAD   -->
@@ -30,9 +34,9 @@ if (isset($_POST['submit'])) {$util->modif_util($_POST['email'], $_POST['passwor
                 <div class="box" id="top">
                     <?php
                     //if($_SESSION) {
-                    //echo '<h1>MODIFIER VOTRE PROFIL</h1>';
+                    //  echo '<h1>MODIFIER VOTRE PROFIL</h1>';
                     //} else {
-                    //echo '<h1>MODIFICATION DU PROFILE DE name</h1>';
+                    //  echo '<h1>MODIFICATION DU PROFILE DE name</h1>';
                     //}
                     ?>
                 </div>
@@ -42,7 +46,8 @@ if (isset($_POST['submit'])) {$util->modif_util($_POST['email'], $_POST['passwor
                 <div class="box" id="middle">
                     <input type="text" name="email" placeholder="Adresse courriel" value="<?= $util->_mail  ?>"><br>
                     <input type="text" name="login" placeholder="Nom d'utilisateur" value="<?= $util->_login  ?>"><br>
-                    <SELECT name="droit">
+                    <?php if($_SESSION['perms'] == 1337) { ?>
+                    <SELECT name="droit" id="edit-select">
                         <option value="<?= $util->_iddroit ?>"><?= $util->_droit ?></option>
                         <?php
                         $req = "SELECT * FROM `droits` WHERE `nom` != '$util->_droit'";
@@ -52,6 +57,7 @@ if (isset($_POST['submit'])) {$util->modif_util($_POST['email'], $_POST['passwor
                             <option value="<?= $list_droits[$i]['id'] ?>"><?= $list_droits[$i]['nom'] ?></option>
                         <?php } ?>
                     </SELECT>
+                    <?php } ?>
                     <input type="password" name="password" placeholder="Mot de passe"><br>
                     <input type="password" name="password_confirmation" placeholder="Confirmer le Mot de passe">
                 </div>
@@ -66,7 +72,7 @@ if (isset($_POST['submit'])) {$util->modif_util($_POST['email'], $_POST['passwor
                     </hr>
                 </div>
                 <div class="box" id="bottom">
-                    <input type="submit" name="login-button" class="btn blue" value="Revenir à la page principale">
+                    <input type="submit" name="return" class="btn blue" value="Revenir à la page principale">
                 </div>
             </form>
         </div>
