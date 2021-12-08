@@ -96,6 +96,9 @@ class Module_Inscription
     private $_password;
     private $_password_verif;
     private $_email;
+    private $_Malert;
+    private $_Talert;
+
 
     function __construct(string $login, string $password, string $password_verif, string $email, int $droit = 1)
     {
