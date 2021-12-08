@@ -11,7 +11,7 @@ require('../fonctions.php');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $GLOBALS['name'] . ' - Accueil' ?></title>
+    <title><?php echo $GLOBALS['name'] . ' - Article' ?></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="/blog/css/style.css">
 </head>

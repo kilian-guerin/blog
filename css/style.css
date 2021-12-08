@@ -851,17 +851,22 @@ section.view-article div.container-2 span {
     margin-bottom: 3%;
 }
 
-section.view-article textarea {
-    width: 35%;
-    background-color: whitesmoke;
-    border: #333 solid 2px;
-}
-
 /*
 
         COMMENTARY
 
 */
+
+section.view-article textarea {
+    width: 95%;
+    background-color: whitesmoke;
+    border: #333 solid 2px;
+    margin-bottom: 3%;
+    padding: 2%;
+
+    font-size: 105%;
+    font-family: 'Comfortaa';
+}
 
 section.view-article div.container-3 {
     width: 40%;
@@ -899,6 +904,14 @@ section.view-article div.container-3 h5 {
     overflow: scroll;
     width: 70%;
     height: 50%;
+}
+
+#form-commentaire {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 

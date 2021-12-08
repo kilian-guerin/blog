@@ -232,6 +232,19 @@ class Article
         $creq = "SELECT `commentaire`, `id_article`, `login`, `commentaires`.`date` FROM `commentaires` INNER JOIN `utilisateurs` ON commentaires.id_utilisateur = utilisateurs.id INNER JOIN `articles` ON commentaires.id_article = articles.id WHERE id_article=$id";
         $cstmt = $GLOBALS['PDO']->query($creq);
         $commentaire = $cstmt->fetchAll(PDO::FETCH_ASSOC);
+        if (isset($_POST['submit'])) {
+            $id_util = $_SESSION['id'];
+            $comment = $_POST['commentaire'];
+
+                $screq = 'INSERT INTO `commentaires`(`commentaire`, `id_article`, `id_utilisateur`) VALUES (:commentaire, :id, :id_util)';
+                $scstmt = $GLOBALS['PDO']->prepare($screq);
+                $scstmt->execute([
+                    ':commentaire' => $comment,
+                    ':id' => $id,
+                    ':id_util' => $id_util,
+                ]);
+                header('refresh: 0;');
+        }
 ?>
         <main class="view-article">
             <div class="container-top">
@@ -255,7 +268,10 @@ class Article
                 </span>
             </div>
             <h3 class="title">Réagir à l'article</h3>
-            <textarea minlength="5" rows="10" cols="45"></textarea>
+            <form action="" method="post" id="form-commentaire">
+                <textarea name="commentaire" minlength="5" rows="10" cols="45"></textarea>
+                <input type="submit" class="btn green" name="submit">
+            </form>
             <div class="container-2" id="container-commentaire">
                 <?php foreach ($commentaire as $value) { ?>
                     <div class="container-3">
