@@ -189,7 +189,7 @@ class Module_Inscription
                         $this->_Malert = "L'utilisateur " . $this->_login . " existe déjà";
                     }
                 } else {
-                    $this->_Malert = 'Les mots de passes ne sonts pas identiques';
+                    $this->_Malert = 'Les mots de passes ne sont pas identiques';
                 }
             }
         }
