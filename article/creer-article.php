@@ -13,7 +13,12 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "Créer l'article" ) {
     $stmt = $GLOBALS['PDO']->query($req);
     $arti = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
+if (isset($arti[0]['id_categorie'])) {
+    $id_cat = $arti[0]['id_categorie'];
+}
+else {
+    $id_cat = "";
+}
 if (isset($_POST["submit"]) && $_POST["submit"] == "Modifier l'article" ) {
     $req = "UPDATE `articles` SET `article`=:article,`titre`=:titre,`id_categorie`=:idcat WHERE `id`=$idarticle";
     $stmt = $GLOBALS['PDO']->prepare($req);
@@ -22,7 +27,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "Modifier l'article" ) {
         ':titre' => $_POST['title-article'],
         ':idcat' => $_POST['choose-article'],
     ]);
-    header('refresh:2');
+    header('refresh:0');
 }
 ?>
 
@@ -58,9 +63,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "Modifier l'article" ) {
                         $stmt = $GLOBALS['PDO']->query($req);
                         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         for ($i = 0; $i < count($list_articles); $i++) { ?>
-                            <option value="<?php echo $list_articles[$i]['id'] ?>" <?php if (isset($arti[0]['id_categorie'])) {
-                                                                                        $arti[0]['id_categorie'] == $list_articles[$i]['id'] ? "selected" : "";
-                                                                                    } ?>><?= $list_articles[$i]['nom'] ?></option> <?php } ?>
+                            <option value="<?php echo $list_articles[$i]['id'] ?>" <?php if ($id_cat == $list_articles[$i]['id']) {echo "selected";} ?>><?= $list_articles[$i]['nom'] ?></option> <?php } ?>
                     </select>
                     <textarea name="desc-article" placeholder="Écrivez votre article"><?= isset($arti[0]['article']) ? $arti[0]['article'] : ""  ?></textarea>
                 </div>

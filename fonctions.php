@@ -238,7 +238,7 @@ class Article
         if (isset($_POST['submit'])) {
             $id_util = $_SESSION['id'];
             $comment = $_POST['commentaire'];
-            if (strlen(str_replace(' ', '', $comment= 8))) {
+            if (strlen(str_replace(' ', '', $comment)) > 8) {
                 $screq = 'INSERT INTO `commentaires`(`commentaire`, `id_article`, `id_utilisateur`) VALUES (:commentaire, :id, :id_util)';
                 $scstmt = $GLOBALS['PDO']->prepare($screq);
                 $scstmt->execute([
@@ -274,7 +274,7 @@ class Article
             <h2 class="title">Réagir à l'article</h2>
             <?php if ($_SESSION) { ?>
                 <form action="" method="post" id="form-commentaire">
-                    <textarea name="commentaire" minlength="5" rows="10" cols="45"></textarea>
+                    <textarea placeholder="8 caractères minimum" name="commentaire" minlength="5" rows="10" cols="45"></textarea>
                     <input type="submit" class="btn green" name="submit">
                 </form>
             <?php } else { ?>

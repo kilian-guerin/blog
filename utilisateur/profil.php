@@ -12,7 +12,6 @@ if (isset($_POST['submit'])) {
 } else if(isset($_POST['return'])) {
     header('Location: /blog/index.php');
 }
-var_dump($_SESSION);
 ?>
 
 <!--    HEAD   -->
