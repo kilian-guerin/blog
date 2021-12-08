@@ -1,6 +1,6 @@
 <?php
 require('../fonctions.php');
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && $_SESSION['perms'] == "1337") {
     $idutil = $_GET['id'];
 } else {
     $idutil = $_SESSION['id'];
@@ -12,6 +12,7 @@ if (isset($_POST['submit'])) {
 } else if(isset($_POST['return'])) {
     header('Location: /blog/index.php');
 }
+var_dump($_SESSION);
 ?>
 
 <!--    HEAD   -->
@@ -30,7 +31,7 @@ if (isset($_POST['submit'])) {
 <body>
     <main class="login" style="overflow: hidden;">
         <div class="container" id="forms">
-            <form action="#" method="post" class="forms">
+            <form action="" method="post" class="forms">
                 <div class="box" id="top">
                     <?php
                     //if($_SESSION) {

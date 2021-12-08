@@ -1,18 +1,27 @@
 <?php
-require ('../fonctions.php');
+require('../fonctions.php');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+var_dump($_SESSION);
 $article = new Article();
-if (isset($_POST['submit'])){
-    $article->insArticle($_POST['desc-article'],$_POST['title-article'],$_SESSION['id'],$_POST['choose-article']);
-} elseif(isset($_POST['back'])) {
+if (isset($_POST['submit'])) {
+    $article->insArticle($_POST['desc-article'], $_POST['title-article'], $_SESSION['id'], $_POST['choose-article']);
+} elseif (isset($_POST['back'])) {
     header('Location: /blog/index.php');
+} elseif (isset($_GET['id']) && $_SESSION['perms'] == 1337) {
+    $idarticle = $_GET['id'];
+    echo $idarticle;
+    $req = "SELECT * FROM `articles` WHERE `id`= $idarticle";
+    $stmt = $GLOBALS['PDO']->query($req);
+    $article = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    var_dump($article);
 }
 ?>
 
 <!--    HEAD   -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -21,11 +30,14 @@ if (isset($_POST['submit'])){
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
 </head>
+
 <body>
     <main class="create-article">
         <div class="container" id="forms">
             <form action="#" method="post" class="forms">
-            <?php if (isset($_POST['submit'])) {$article->alerts(); } ?>
+                <?php if (isset($_POST['submit'])) {
+                    $article->alerts();
+                } ?>
 
                 <div class="box" id="top">
                     <h1>CRÉER VOTRE ARTICLE</h1><br>
@@ -33,23 +45,24 @@ if (isset($_POST['submit'])){
                 <div class="box" id="middle">
                     <input type="text" name="title-article" placeholder="Titre de l'article"><br>
                     <select name="choose-article">
-                    <?php
+                        <?php
                         $req = "SELECT * FROM `categories`";
                         $stmt = $GLOBALS['PDO']->query($req);
                         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         for ($i = 0; $i < count($list_articles); $i++) { ?>
-                            <option value="<?php echo $list_articles[$i]['id'] ?>"><?php echo $list_articles[$i]['nom'] ?></option> <?php 
-                        } ?>
+                            <option value="<?php echo $list_articles[$i]['id'] ?>"><?php echo $list_articles[$i]['nom'] ?></option> <?php
+                                                                                                                                } ?>
                     </select>
-                    <input type="text" name="icon-article" placeholder="Icon de l'article (Font Awesome uniquement)"><br>
                     <textarea name="desc-article" placeholder="Écrivez votre article"></textarea>
                 </div>
                 <div class="box" id="bottom">
-                    <input type="submit" name="submit" class="btn green" autofocus value="Créer l'article">
+                    <?php if ((isset($_GET['id']) && $_SESSION['perms'] == 1337)) { ?>
+                    <input type="submit" name="submit" class="btn green" autofocus value="Créer l'article"> <?php } ?>
                     <input type="submit" name="back" class="btn orange" autofocus value="Revenir à la page principale">
                 </div>
             </form>
         </div>
     </main>
 </body>
+
 </html>
