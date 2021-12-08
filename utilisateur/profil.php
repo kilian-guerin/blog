@@ -1,7 +1,13 @@
 <?php
 require('../fonctions.php');
-
-
+if (isset($_GET['id'])) {
+    $idutil = $_GET['id'];
+} else {
+    $idutil = $_SESSION['id'];
+}
+$util = new Modif_Profil($idutil);
+$util->get_utilisateur();
+if (isset($_POST['submit'])) {$util->modif_util($_POST['email'], $_POST['password'], $_POST['password_confirmation'], $_POST['login'], $_POST['droit']);}
 ?>
 
 <!--    HEAD   -->
@@ -24,18 +30,28 @@ require('../fonctions.php');
                 <div class="box" id="top">
                     <?php
                     //if($_SESSION) {
-                        //echo '<h1>MODIFIER VOTRE PROFIL</h1>';
+                    //echo '<h1>MODIFIER VOTRE PROFIL</h1>';
                     //} else {
-                        //echo '<h1>MODIFICATION DU PROFILE DE name</h1>';
+                    //echo '<h1>MODIFICATION DU PROFILE DE name</h1>';
                     //}
                     ?>
                 </div>
                 <?php if (isset($_POST['submit'])) {
-                    $connexion->alerts();
+                    $util->alerts();
                 } ?>
                 <div class="box" id="middle">
-                    <input type="text" name="email" placeholder="Adresse courriel"><br>
-                    <input type="text" name="login" placeholder="Nom d'utilisateur"><br>
+                    <input type="text" name="email" placeholder="Adresse courriel" value="<?= $util->_mail  ?>"><br>
+                    <input type="text" name="login" placeholder="Nom d'utilisateur" value="<?= $util->_login  ?>"><br>
+                    <SELECT name="droit">
+                        <option value="<?= $util->_iddroit ?>"><?= $util->_droit ?></option>
+                        <?php
+                        $req = "SELECT * FROM `droits` WHERE `nom` != '$util->_droit'";
+                        $stmt = $GLOBALS['PDO']->query($req);
+                        $list_droits = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        for ($i = 0; $i < count($list_droits); $i++) { ?>
+                            <option value="<?= $list_droits[$i]['id'] ?>"><?= $list_droits[$i]['nom'] ?></option>
+                        <?php } ?>
+                    </SELECT>
                     <input type="password" name="password" placeholder="Mot de passe"><br>
                     <input type="password" name="password_confirmation" placeholder="Confirmer le Mot de passe">
                 </div>

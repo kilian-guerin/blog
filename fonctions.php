@@ -386,6 +386,212 @@ class Article
     }
 }
 
+class Modif_Profil
+{
+
+    private $_id;
+    public $_login;
+    public $_password;
+    public $_mail;
+    public $_droit;
+    public $_iddroit;
+    private $_Malert;
+    private $_Talert;
+
+    function __construct(int $id)
+    {
+        $this->_id = $id;
+    }
+
+    public function get_utilisateur()
+    {
+        $req = "SELECT `utilisateurs`.`id`,`login`,`password`,`email`, `droits`.`nom` AS `droits`, `droits`.`id` AS `iddroits` FROM `utilisateurs` INNER JOIN `droits` ON `utilisateurs`.`id_droits` = `droits`.`id` WHERE `utilisateurs`.`id` = $this->_id";
+        $stmt = $GLOBALS['PDO']->query($req);
+        $list_util = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $this->_login = $list_util[0]['login'];
+        $this->_password = $list_util[0]['password'];
+        $this->_mail = $list_util[0]['email'];
+        $this->_droit = $list_util[0]['droits'];
+        $this->_iddroit = $list_util[0]['iddroits'];
+    }
+
+    public function verif_email($mail)
+    {
+        $req = "SELECT `email` FROM `utilisateurs` WHERE email='$mail'";
+        $stmt = $GLOBALS['PDO']->query($req);
+        $list_mail = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $mailexist = FALSE;
+        if ($_SESSION['email'] == $mail) {
+            return $mailexist;
+        } elseif (isset($list_mail[0]['email'])) {
+            $mailexist = TRUE;
+            return $mailexist;
+        }
+    }
+
+    public function verif_login($login)
+    {
+        $req = "SELECT `login` FROM `utilisateurs` WHERE login='$login'";
+        $stmt = $GLOBALS['PDO']->query($req);
+        $list_login = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $loginexist = FALSE;
+        if ($_SESSION['login'] == $login) {
+            return $loginexist;
+        } elseif (isset($list_login[0]['login'])) {
+            $loginexist = TRUE;
+            return $loginexist;
+        }
+    }
+
+
+
+
+    public function modif_util($email, $password1, $password2, $login, $iddroit)
+    {
+        if ($password1 == "" or $password2 == "") {
+            $this->_Malert = 'Veuillez remplir les mots de passes';
+        } else {
+            if ($password2 != $password1) {
+                $this->_Malert = 'Les mots de passes sont différents';
+            } else {
+                if ($email == "") {
+                    $this->_Malert = 'Veuillez remplir votre mail';
+                } else {
+                    if ($login == "") {
+                        $this->_Malert = 'Veuillez remplir votre login';
+                    } else {
+                        if (filter_var($email, FILTER_VALIDATE_EMAIL) == FALSE) {
+                            $this->_Malert = $email . " n'est pas un format 'email' valide";
+                        } else {
+                            if ($this->verif_email($email)) {
+                                $this->_Malert = $email . " existe déjà";
+                            } else {
+                                if ($this->verif_login($login)) {
+                                    $this->_Malert = $login . " existe déjà";
+                                } else {
+                                    $req = "UPDATE `utilisateurs` SET `login`=:login,`password`=:password,`email`=:email,`id_droits`=:iddroit WHERE `id`=:id";
+                                    $stmt = $GLOBALS['PDO']->prepare($req);
+                                    $stmt->execute([
+                                        ':login' => $login,
+                                        ':password' => password_hash($password1, PASSWORD_DEFAULT),
+                                        ':email' => $email,
+                                        ':iddroit' => $iddroit,
+                                        ':id' => $this->_id,
+                                    ]);
+                                    $this->_Malert = 'Utilisateur modifié';
+                                    $this->_Talert = 1;
+                                    $_SESSION['email'] = $email;
+                                    $_SESSION['login'] = $login;
+                                    $_SESSION['perms'] = $iddroit;
+                                    header('refresh:2');
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //     private function verif_mdp_verif($pass1, $pass2)
+    //     {
+    //         if ($pass1 === $pass2 && $pass1 != "") {
+    //             return TRUE;
+    //         }
+    //     }
+
+    //     private function verif_util($login)
+    //     {
+
+    //         $req = "SELECT `login` FROM `utilisateurs` WHERE login='$login'";
+    //         $stmt = $GLOBALS['PDO']->query($req);
+    //         $list_util = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //         $verifexist = FALSE;
+    //         if ($_SESSION['id'] == $login) {
+    //             $verifexist = FALSE;
+    //             return $verifexist;
+    //         }
+    //         elseif ($list_util[0]['login'] == $this->_login) {
+    //             $verifexist = TRUE;
+    //             return $verifexist;
+    //         } else {
+    //             $verifexist = FALSE;
+    //             return $verifexist;
+    //         }var_dump($verifexist);
+    //     }
+
+    public function alerts()
+    {
+        if ($this->_Talert == 1) {
+            echo "<div class='succes'>" . $this->_Malert . "</div>";
+        } else {
+            echo "<div class='error'>" . $this->_Malert . "</div>";
+        }
+    }
+
+
+    //     private function verif_mail($email)
+    //     {
+
+    //         $req = "SELECT `login` FROM `utilisateurs` WHERE login='$email'";
+    //         $stmt = $GLOBALS['PDO']->query($req);
+    //         $list_util = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    //         if ($_SESSION['email'] == $email) {
+    //             $verifexist = FALSE;
+    //             return $verifexist;
+    //         }
+    //         elseif ($list_util[0]['email'] == $email) {
+    //             $verifexist = TRUE;
+    //             return $verifexist;
+    //         } else {
+    //             $verifexist = FALSE;
+    //             return $verifexist;
+    //         }
+    //     }
+
+    //     public function ins_util($email, $password1, $password2, $login)
+    //     {
+    //         if ($email == "") {
+    //             $this->_Malert = 'Veuillez remplir votre email';
+    //         } else {
+    //             if ($password1 == "" && $password2 == "") {
+    //                 $this->_Malert = 'Veuillez remplir le mot de passe';
+    //             } else {
+    //                 if ($this->verif_mdp_verif($password1, $password2)) {
+    //                     if ($this->verif_util($login) == FALSE) {
+    //                         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    //                             if ($this->verif_mail($email) == FALSE) {
+
+    //                                 // $req = 'INSERT INTO `utilisateurs`(`login`, `password`, `email`, `id_droits`) VALUES (:login, :password, :email, :id)';
+    //                                 // $stmt = $GLOBALS['PDO']->prepare($req);
+    //                                 // $stmt->execute([
+    //                                 //     ':login' => $this->_login,
+    //                                 //     ':password' => password_hash($this->_password, PASSWORD_DEFAULT),
+    //                                 //     ':email' => $this->_email,
+    //                                 //     ':id' => $this->_id = 1,
+    //                                 // ]);
+    //                                 $this->_Malert = 'Utilisateur crée';
+    //                                 $this->_Talert = 1;
+    //                             } else {
+    //                                 $this->_Malert = $email . " existe déjà";
+    //                             }
+    //                         } else {
+    //                             $this->_Malert = $email . " n'est pas une adresse valide";
+    //                         }
+    //                     } else {
+    //                         $this->_Malert = "L'utilisateur " . $login . " existe déjà";
+    //                     }
+    //                 } else {
+    //                     $this->_Malert = 'Les mots de passes ne sonts pas identiques';
+    //                 }
+    //             }
+    //         }
+    //     }
+}
+
+
+
+
 ?>
 
 <style>
