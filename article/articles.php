@@ -47,34 +47,34 @@ ini_set('display_errors', 1);
                 $_GET['categorie'] = 'tout';
             }
 
-            if (!isset($_GET['page'])) {
-                $_GET['page'] = 0;
+            if (!isset($_GET['start'])) {
+                $_GET['start'] = 0;
             }
             $article = new Article();
-            $article->getArticleLimite(5, $_GET['page'], 'ligne', $_GET['categorie']);
-            $article->countnext(5, $_GET['page'] + 5, 'ligne', $_GET['categorie']);
+            $article->getArticleLimite(5, $_GET['start'], 'ligne', $_GET['categorie']);
+            $article->countnext(5, $_GET['start'] + 5, 'ligne', $_GET['categorie']);
             ?>
         </div>
 
         <?php
-        $OFFSET = $_GET['page'];
+        $OFFSET = $_GET['start'];
         if ($OFFSET <= 0) {
             $OFFSET = 0;
-            $_GET['page'] = 0;
+            $_GET['start'] = 0;
         }
         
         ?>
             <div class="pagination">
-                <?php if ($_GET['page'] > 0) { ?>
+                <?php if ($_GET['start'] > 0) { ?>
                 <div class="" id="left">
-                    <a href="/blog/article/articles.php?<?php echo 'categorie=' . $_GET['categorie'] . '&';  ?>page=<?php echo $OFFSET - 5; ?>">
+                    <a href="/blog/article/articles.php?<?php echo 'categorie=' . $_GET['categorie'] . '&';  ?>start=<?php echo $OFFSET - 5; ?>">
                         <i class="fas fa-chevron-left fa-4x"></i>
                     </a>
                 </div>
             <?php } ?>
             <?php if ($article->_countnext > 0) { ?>
                 <div class="" id="right">
-                    <a href="/blog/article/articles.php?<?php echo 'categorie=' . $_GET['categorie'] . '&';  ?>page=<?php echo $OFFSET + 5; ?>">
+                    <a href="/blog/article/articles.php?<?php echo 'categorie=' . $_GET['categorie'] . '&';  ?>start=<?php echo $OFFSET + 5; ?>">
                         <i class="fas fa-chevron-right fa-4x"></i>
                     </a>
                 </div>

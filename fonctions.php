@@ -120,7 +120,7 @@ class Module_Inscription
         $req = "SELECT `login` FROM `utilisateurs` WHERE login='$this->_login'";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_util = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($list_util[0]['login'] == $this->_login) {
+        if (isset($list_util[0]['login'])) {
             $verifexist = TRUE;
             return $verifexist;
         } else {
@@ -135,7 +135,7 @@ class Module_Inscription
         $req = "SELECT `email` FROM `utilisateurs` WHERE email='$this->_email'";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_mail = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if ($list_mail[0]['email'] == $this->_email) {
+        if (isset($list_mail[0]['email'])) {
             $verifexist = TRUE;
             return $verifexist;
         } else {
@@ -366,7 +366,6 @@ class Article
                         <div class="box" id="right">
                             <span class="fa-stack fa-2x">
                                 <i class="fas fa-chevron-left fa-stack-2x"></i>
-                                <i class="fas fa-ban fa-stack-2x" style="color:Tomato"></i>
                             </span>
                         </div>
                         <div class="box" id="left">
