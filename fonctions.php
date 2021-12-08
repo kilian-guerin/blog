@@ -189,7 +189,7 @@ class Module_Inscription
                         $this->_Malert = "L'utilisateur " . $this->_login . " existe déjà";
                     }
                 } else {
-                    $this->_Malert = 'Les mots de passes ne sonts pas identiques';
+                    $this->_Malert = 'Les mots de passes ne sont pas identiques';
                 }
             }
         }
@@ -357,7 +357,7 @@ class Article
                             <?= strlen($list_articles[$i]['article']) > 100 ? substr($list_articles[$i]['article'], 0, 100) . "..." : $list_articles[$i]['article']  ?>
                         </p>
                         <div class="user">
-                            <img src="https://studyinbaltics.ee/wp-content/uploads/2020/03/3799Ffxy.jpg" alt="user" />
+                            <img src="https://cdn-icons.flaticon.com/png/512/4168/premium/4168680.png?token=exp=1638969772~hmac=70656ad9ecbbf7d91f34c95f144e18e8" alt="user" />
                             <div class="user-info">
                                 <h5><?php echo $list_articles[$i]['login'] ?></h5>
                                 <small><?php echo $list_articles[$i]['date'] ?></small>
@@ -430,6 +430,8 @@ class Modif_Profil
         $mailexist = FALSE;
         if ($_SESSION['email'] == $mail) {
             return $mailexist;
+        } elseif ($list_mail[0]['email'] == $mail) {
+            return $mailexist;
         } elseif (isset($list_mail[0]['email'])) {
             $mailexist = TRUE;
             return $mailexist;
@@ -444,6 +446,8 @@ class Modif_Profil
         $loginexist = FALSE;
         if ($_SESSION['login'] == $login) {
             return $loginexist;
+        } elseif ($list_login[0]['login'] == $login) {
+            return $loginexist; 
         } elseif (isset($list_login[0]['login'])) {
             $loginexist = TRUE;
             return $loginexist;
@@ -487,9 +491,10 @@ class Modif_Profil
                                     ]);
                                     $this->_Malert = 'Utilisateur modifié';
                                     $this->_Talert = 1;
+                                    if ($_SESSION['id'] == $this->_id) {
                                     $_SESSION['email'] = $email;
                                     $_SESSION['login'] = $login;
-                                    $_SESSION['perms'] = $iddroit;
+                                    $_SESSION['perms'] = $iddroit;}
                                     header('refresh:2');
                                 }
                             }
