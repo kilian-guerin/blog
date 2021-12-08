@@ -43,21 +43,23 @@ if (isset($_POST['submit'])) {
                     <h1>CRÉER VOTRE ARTICLE</h1><br>
                 </div>
                 <div class="box" id="middle">
-                    <input type="text" name="title-article" placeholder="Titre de l'article"><br>
+                    <input type="text" name="title-article" placeholder="Titre de l'article" value="<?= isset($article[0]['titre']) ? $article[0]['titre'] : "" ?>"><br>
                     <select name="choose-article">
                         <?php
                         $req = "SELECT * FROM `categories`";
                         $stmt = $GLOBALS['PDO']->query($req);
                         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         for ($i = 0; $i < count($list_articles); $i++) { ?>
-                            <option value="<?php echo $list_articles[$i]['id'] ?>"><?php echo $list_articles[$i]['nom'] ?></option> <?php
+                            <option value="<?php echo $list_articles[$i]['id'] ?>"><?= $list_articles[$i]['nom'] ?></option> <?php
                                                                                                                                 } ?>
                     </select>
-                    <textarea name="desc-article" placeholder="Écrivez votre article"></textarea>
+                    <textarea name="desc-article" placeholder="Écrivez votre article"><?= $article[0]['article'] ?></textarea>
                 </div>
                 <div class="box" id="bottom">
                     <?php if ((isset($_GET['id']) && $_SESSION['perms'] == 1337)) { ?>
-                    <input type="submit" name="submit" class="btn green" autofocus value="Créer l'article"> <?php } ?>
+                    <input type="submit" name="submit" class="btn green" autofocus value="Modifier l'article"> <?php } else { ?>
+                    <input type="submit" name="submit" class="btn green" autofocus value="Créer l'article">
+                    <?php } ?>
                     <input type="submit" name="back" class="btn orange" autofocus value="Revenir à la page principale">
                 </div>
             </form>
