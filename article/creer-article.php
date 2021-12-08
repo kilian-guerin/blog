@@ -40,7 +40,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "Modifier l'article" ) {
 </head>
 
 <body>
-    <main class="create-article">
+    <main class="create-article"> 
         <div class="container" id="forms">
             <form action="" method="post" class="forms">
                 <?php if (isset($_POST['submit'])) {
