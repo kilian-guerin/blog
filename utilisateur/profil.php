@@ -1,6 +1,6 @@
 <?php
 require('../fonctions.php');
-if (isset($_GET['id'])) {
+if (isset($_GET['id']) && $_SESSION['perms'] == 1337) {
     $idutil = $_GET['id'];
 } else {
     $idutil = $_SESSION['id'];

@@ -17,7 +17,6 @@ if (($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms
                 ':categorie' => $_POST['categorie'],
             ]);
     }
-    var_dump($_POST);
 ?>
 
     <!--    HEAD   -->
@@ -40,9 +39,9 @@ if (($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms
                     <h1>GÉRER LES CATÉGORIES</h1>
                 </div>
                 <div class="box" id="middle-fix">
-                    <form action="#" method="post">
-                        <input type="text" name="categorie">
-                        <input type="submit" name="submitcategory">
+                    <form action="#" method="post" id="form-category">
+                        <input type="text" id="input-category" placeholder="Nom de votre catégorie" name="categorie">
+                        <input type="submit" class="btn green" name="submitcategory">
                     </form>
                     <?php
                     $req = "SELECT * FROM `categories` ORDER BY `nom` ASC";

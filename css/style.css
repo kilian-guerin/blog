@@ -1138,6 +1138,25 @@ main.admin div.container div.box#middle-fix div#btn-fix div#btn-right form butto
     border-color: #ccc;
 }
 
+#form-category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 30%;
+    height: 15%;
+}
+
+#input-category {
+    width: 75%;
+    height: 35%;
+    padding: 2%;
+    margin-bottom: 5%;
+    font-family: 'Comfortaa';
+    font-size: 90%;
+}
+
+
 /*
         FOOTER
  */
