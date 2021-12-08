@@ -236,14 +236,14 @@ class Article
             $id_util = $_SESSION['id'];
             $comment = $_POST['commentaire'];
 
-                $screq = 'INSERT INTO `commentaires`(`commentaire`, `id_article`, `id_utilisateur`) VALUES (:commentaire, :id, :id_util)';
-                $scstmt = $GLOBALS['PDO']->prepare($screq);
-                $scstmt->execute([
-                    ':commentaire' => $comment,
-                    ':id' => $id,
-                    ':id_util' => $id_util,
-                ]);
-                header('refresh: 0;');
+            $screq = 'INSERT INTO `commentaires`(`commentaire`, `id_article`, `id_utilisateur`) VALUES (:commentaire, :id, :id_util)';
+            $scstmt = $GLOBALS['PDO']->prepare($screq);
+            $scstmt->execute([
+                ':commentaire' => $comment,
+                ':id' => $id,
+                ':id_util' => $id_util,
+            ]);
+            header('refresh: 0;');
         }
 ?>
         <main class="view-article">

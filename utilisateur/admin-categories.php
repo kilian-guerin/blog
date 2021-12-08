@@ -33,7 +33,7 @@ if(($_SESSION['perms'] == 1) && ($_SESSION['perms'] != 42) && ($_SESSION['perms'
             </div>
             <div class="box" id="middle-fix">
                 <?php
-                echo '<a class="btn green" href="#boxcategory" style="width: 100% margin-right: 2.2%">Ajouter une catégorie</a>';
+                echo '<a class="btn green" href="" style="width: 100% margin-right: 2.2%">Ajouter une catégorie</a>';
 
                 $req = "SELECT * FROM `categories` ORDER BY `nom` ASC";
                 $stmt = $GLOBALS['PDO']->query($req);
