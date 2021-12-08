@@ -53,7 +53,7 @@ if (isset($_POST["submit"]) && $_POST["submit"] == "Modifier l'article" ) {
                 <div class="box" id="middle">
                     <input type="text" name="title-article" placeholder="Titre de l'article" value="<?= isset($arti[0]['titre']) ? $arti[0]['titre'] : ""  ?>"><br>
                     <select name="choose-article">
-                        <?php
+                        <?php 
                         $req = "SELECT * FROM `categories`";
                         $stmt = $GLOBALS['PDO']->query($req);
                         $list_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
