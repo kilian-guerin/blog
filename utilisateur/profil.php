@@ -1,16 +1,24 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require('../fonctions.php');
 if (isset($_GET['id']) && $_SESSION['perms'] == "1337") {
     $idutil = $_GET['id'];
 } else {
     $idutil = $_SESSION['id'];
 }
+if (!isset($_POST['droit'])) {
+    $_POST['droit'] = 1;
+}
 $util = new Modif_Profil($idutil);
-$util->get_utilisateur();
 if (isset($_POST['submit'])) {
     $util->modif_util($_POST['email'], $_POST['password'], $_POST['password_confirmation'], $_POST['login'], $_POST['droit']);
-} else if(isset($_POST['return'])) {
+} elseif(isset($_POST['return'])) {
     header('Location: /blog/index.php');
+}
+$util->get_utilisateur();
+if (!isset($_POST['droit'])) {
+    $_POST['droit'] = 1;
 }
 ?>
 

@@ -424,33 +424,33 @@ class Modif_Profil
 
     public function verif_email($mail)
     {
-        $req = "SELECT `email` FROM `utilisateurs` WHERE email='$mail'";
+        $req = "SELECT `email`, `id` FROM `utilisateurs` WHERE `id`!='$this->_id'";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_mail = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $mailexist = FALSE;
-        if ($_SESSION['email'] == $mail) {
-            return $mailexist;
-        } elseif ($list_mail[0]['email'] == $mail) {
-            return $mailexist;
-        } elseif (isset($list_mail[0]['email'])) {
-            $mailexist = TRUE;
-            return $mailexist;
+        for ($k = 0; isset($list_mail[$k]['email']); $k++) {
+            if ($list_mail[$k]['email'] == $mail) {
+                $mailexist = TRUE;
+                return $mailexist;
+            }
+            
         }
+
+        
     }
 
     public function verif_login($login)
     {
-        $req = "SELECT `login` FROM `utilisateurs` WHERE login='$login'";
+        $req = "SELECT `login`,`id` FROM `utilisateurs` WHERE `id`!=$this->_id";
         $stmt = $GLOBALS['PDO']->query($req);
         $list_login = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $loginexist = FALSE;
-        if ($_SESSION['login'] == $login) {
-            return $loginexist;
-        } elseif ($list_login[0]['login'] == $login) {
-            return $loginexist; 
-        } elseif (isset($list_login[0]['login'])) {
-            $loginexist = TRUE;
-            return $loginexist;
+        for ($j = 0; isset($list_login[$j]['login']); $j++) {
+            if ($list_login[$j]['login'] == $login) {
+                $loginexist = TRUE;
+                return $loginexist;
+            }
+            
         }
     }
 
@@ -495,7 +495,7 @@ class Modif_Profil
                                     $_SESSION['email'] = $email;
                                     $_SESSION['login'] = $login;
                                     $_SESSION['perms'] = $iddroit;}
-                                    header('refresh:2');
+                                    // header('refresh:2');
                                 }
                             }
                         }
