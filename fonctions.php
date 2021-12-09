@@ -357,7 +357,7 @@ class Article
                             <?= strlen($list_articles[$i]['article']) > 100 ? substr($list_articles[$i]['article'], 0, 100) . "..." : $list_articles[$i]['article']  ?>
                         </p>
                         <div class="user">
-                            <img src="https://cdn-icons.flaticon.com/png/512/4168/premium/4168680.png?token=exp=1638969772~hmac=70656ad9ecbbf7d91f34c95f144e18e8" alt="user" />
+                            <img src="/blog/img/name.png" style="width:25%; height:25%;" alt="user"/>
                             <div class="user-info">
                                 <h5><?php echo $list_articles[$i]['login'] ?></h5>
                                 <small><?php echo $list_articles[$i]['date'] ?></small>
